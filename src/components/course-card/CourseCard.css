@@ -1,0 +1,54 @@
+.cards {
+    padding: 100px 0px;
+
+}
+
+.cards h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.cards .container .flex {
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    color: #000;
+    background: #fff;
+    border-radius: 20px;
+    transition: 300ms;
+}
+
+.card:hover {
+    transform: scale(1.050);
+}
+
+.card:active {
+    transform: scale(1);
+}
+
+.card img:first-child {
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.card .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 2;
+}
+
+.card .card-text .flex {
+    justify-content: space-between;
+}
+
+.card-text h3 {
+    font-size: 22px;
+}
+
+.card-text strong {
+    font-size: 18px;
+}

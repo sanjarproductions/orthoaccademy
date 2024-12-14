@@ -1,0 +1,110 @@
+nav {
+    background: #F4F4F4;
+    padding: 50px 0px;
+}
+
+.nav-wrapper {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 26px 0px #0000001c;
+    justify-content: space-between;
+}
+
+.nav-wrapper .logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-wrapper .logo p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0c75fd;
+}
+
+.nav-wrapper .logo img {
+    max-width: 220px;
+    max-height: 55px;
+}
+
+.links-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+}
+
+.links-wrapper a {
+    color: #000;
+    font-size: 18px;
+}
+
+.action-btns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.action-btns .action-btn {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+
+}
+
+.action-btns .action-btn:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #000;
+}
+
+.action-btns .action-btn:last-child {
+    background: #0c75fd;
+    padding: 18px 40px;
+    border-radius: 30px;
+    color: #fff;
+}
+
+.active {
+    font-weight: 600;
+}
+
+
+
+/*  */
+
+
+.services-link {
+    position: relative;
+    cursor: pointer;
+}
+
+.services-link p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.services-link:hover .sub-links {
+    display: block;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sub-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.sub-links a {
+    white-space: nowrap;
+}

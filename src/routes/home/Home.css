@@ -1,0 +1,75 @@
+.hero {
+    background: #F4F4F4;
+}
+
+.hero .container .flex:first-child {
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text h1 {
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.hero-text .desc {
+    font-size: 20px;
+    font-weight: 400;
+    max-width: 645px;
+    margin-top: 24px;
+    margin-bottom: 50px;
+}
+
+.hero-text .signup-btn {
+    padding: 20px 40px;
+    background: #0c75fd;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+}
+
+.hero-text .stats {
+    padding-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-text .stats .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-text .stats .stat strong {
+    font-size: 40px;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.hero-text .stats .stat p {
+    font-size: 18px;
+}
+
+.hero-img {
+    position: relative;
+}
+
+.hero-img img:first-child {
+    position: relative;
+    z-index: 1;
+    bottom: 0;
+    margin-bottom: -4px;
+}
+
+.hero-img-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.cards {
+    background: #F4F4F4;
+}
