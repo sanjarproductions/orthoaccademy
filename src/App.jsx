@@ -9,8 +9,9 @@ import Home from './routes/home/Home'
 import Course from './routes/course/Course'
 import Login from './routes/login/Login'
 import Signup from './routes/signup/Signup'
+import Dashboard from './routes/dashboard/Dashboard'
 
-// import 
+import { ToastContainer } from "react-toastify"
 
 function App() {
   return (
@@ -18,11 +19,13 @@ function App() {
       <Nav />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
       <Footer />
+      <ToastContainer limit={2} />
     </>
   )
 }
@@ -31,8 +34,8 @@ export default App
 
 
 // home page +
-// sign up page
-// login page
+// sign up page - almost
+// login page +
 // about course page (courses/1) +
 // invoice (pay page) stripe
 // watch the course (page)
