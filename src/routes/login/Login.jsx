@@ -1,9 +1,9 @@
-// import React from 'react'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import instance from "../../api/axios"
 import { toast } from 'react-toastify';
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import "./Login.css"
 
@@ -12,6 +12,7 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -28,10 +29,10 @@ const Login = () => {
     })
       .then(response => {
         console.log(response.data)
-        localStorage.setItem("user-token", response.data.data.token)
         toast.success("Tizimga kirildi")
         setIsLoading(false)
-        navigate("/dashboard")
+        navigate("/")
+        dispatch({ type: "LOGIN", payload: response.data });
       })
       .catch(error => {
         console.log(error)

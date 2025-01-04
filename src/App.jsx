@@ -36,6 +36,7 @@ export default App
 // home page +
 // sign up page +
 // login page +
+// log out +
 // about course page (courses/1) +
 // invoice (pay page) stripe
 // watch the course (page)

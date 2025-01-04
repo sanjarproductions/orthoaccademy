@@ -1,27 +1,29 @@
-// import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import Logo from "/logo.png"
-import instance from "../../api/axios"
+import { useDispatch } from 'react-redux';
+// import instance from "../../api/axios"
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import "./Nav.css"
-// import { jwtDecode } from "jwt-decode";
-
 
 import { MdAccountCircle } from "react-icons/md";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const Nav = () => {
-  const token = localStorage.getItem("user-token")
-  // const decoded = jwtDecode(token);
-  // console.log(decoded)
+  const isLogged = useSelector(state => state.login.isLogged)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   function logout() {
-    instance.post(`/auth/logout`, {
-      email: "sanjar@gmail.com",
-      password: "12345678"
-    })
-      .then(response => console.log(response.data))
-      .catch(err => console.log(err))
+    dispatch({ type: "LOGOUT" })
+    navigate("/")
+    // instance.post(`/auth/logout`, {
+    //   email: "sanjar@gmail.com",
+    //   password: "12345678"
+    // })
+    //   .then(response => console.log(response.data))
+    //   .catch(err => console.log(err))
   }
 
   return (
@@ -45,7 +47,7 @@ const Nav = () => {
 
         </div>
 
-        {!token ?
+        {!isLogged ?
           <div className="action-btns">
             <Link className='action-btn' to={"/login"}> <FaCartPlus /> Kirish</Link>
             <Link className='action-btn' to={"/signup"}>Register</Link>
@@ -53,9 +55,9 @@ const Nav = () => {
           :
           <div className='user-profile'>
             <MdAccountCircle className='user-profile__icon' />
-            {/* <ul className="profile-links">
+            <ul className="profile-links">
               <li onClick={logout}>Log Out</li>
-            </ul> */}
+            </ul>
           </div>}
       </div>
     </nav >
