@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import "./Course.css"
 import { useParams } from "react-router-dom"
 import instance from "../../api/axios"
-import Image from "/car.jpeg"
 import { Link } from "react-router-dom"
 const Courses = () => {
   const [courseData, setCourseData] = useState([])
@@ -17,17 +16,17 @@ const Courses = () => {
   console.log(courseData)
   return (
     <>
-      <div className="container">
+      <div className="view-course container">
         <div className="flex">
-          <img src={Image} alt="" width={100 + "%"} height={100 + "%"} className="course-img" />
+          <img src={courseData.image_url} alt="" className="course-img" />
           <div className="course-text">
             <h3>{courseData.title}</h3>
             <p>{courseData.description}</p>
-            <div className="flex">
-              <strong>$ {courseData.price}</strong>
+            <div className="">
               <p className="lessons-count">{courseData.video_count} video</p>
+              <strong className="course-view__price">$ {courseData.price}</strong>
             </div>
-            <Link to={"/"} className="enroll-btn">Boshlash</Link>
+            <Link to={localStorage.getItem("user-token") ? "/dashboard" : "/signup"} className="enroll-btn">Boshlash</Link>
           </div>
         </div>
       </div>

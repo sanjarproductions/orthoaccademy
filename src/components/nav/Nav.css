@@ -108,3 +108,33 @@ nav {
 .sub-links a {
     white-space: nowrap;
 }
+
+/*  */
+
+.user-profile {}
+
+.user-profile:hover .profile-links {
+    display: block;
+}
+
+.user-profile svg {
+    width: 60px;
+    height: 60px;
+}
+
+.profile-links {
+    border: 1px solid #000;
+    position: absolute;
+    top: 17%;
+    display: none;
+    padding: 10px 5px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.profile-links li {
+    color: #000;
+    margin-bottom: 0px;
+    cursor: pointer;
+    color: red;
+}

@@ -1,19 +1,19 @@
-.container .flex {
-    /* justify-content: space-between; */
-    /* align-items: start; */
+.view-course .flex {
     gap: 70px;
+    align-items: start;
 }
 
 .course-img {
     max-height: 700px;
     max-width: 700px;
-    border-radius: 10px;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
 .course-text {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
 }
 
 .course-text h3 {
@@ -22,10 +22,11 @@
 
 .course-text p {
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .course-text strong {
-    font-size: 20px;
+    font-size: 40px;
 }
 
 .lessons-count {
@@ -40,5 +41,15 @@
     color: #fff;
     font-size: 18px;
     text-align: center;
-    max-width: 175px;
+    max-width: 295px;
+    transition: 200ms;
+}
+
+.enroll-btn:hover {
+    background: #006eff;
+    transform: scale(1.10);
+}
+
+.enroll-btn:active {
+    transform: scale(0.9);
 }

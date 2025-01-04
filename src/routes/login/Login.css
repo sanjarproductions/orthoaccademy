@@ -1,0 +1,68 @@
+.login-wrapper {
+    padding: 50px 0px;
+}
+
+.form-wrapper {
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+    padding: 30px 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.form-wrapper h1 {
+    margin-bottom: 40px;
+}
+
+.form-wrapper .submit-btn {
+    border: none;
+    background: dodgerblue;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form input {
+    padding: 10px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+
+.password-wrapper {
+    background: #fff;
+    border-radius: 5px;
+    justify-content: space-between;
+    padding-right: 15px;
+}
+
+.password-wrapper input{
+    width: 100%;
+    flex: 1;
+}
+
+.password-wrapper svg{
+    font-size: 19px;
+}
+
+.loading-icon{
+    animation: rotate 300ms ease-in-out infinite;
+
+}
+
+@keyframes rotate{
+    to{
+        transform: rotate(360deg);
+    }
+}

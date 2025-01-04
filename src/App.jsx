@@ -34,7 +34,7 @@ export default App
 
 
 // home page +
-// sign up page - almost
+// sign up page +
 // login page +
 // about course page (courses/1) +
 // invoice (pay page) stripe

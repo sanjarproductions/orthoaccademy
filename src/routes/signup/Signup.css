@@ -1,19 +1,52 @@
+.signup-wrapper {
+    padding: 50px 0px;
+}
+
 .form-wrapper {
-    border: 1px solid #000;
     max-width: 400px;
     width: 100%;
     margin: auto;
-    padding: 10px;
-
+    padding: 30px 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .signup-form {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     margin-top: 10px;
 }
 
+.form-wrapper h1 {
+    margin-bottom: 40px;
+}
+
+.form-wrapper button {
+    border: none;
+    background: dodgerblue;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 0px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
 .signup-form input {
-    padding: 5px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+}
+
+.redirect {
+    text-align: center;
+    font-size: 16px;
+margin-top: 20px;
+}
+
+.redirect a {
+    text-decoration: underline;
+    color: #000;
 }

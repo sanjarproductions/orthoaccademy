@@ -1,53 +1,60 @@
-// import React from 'react'
 import "./Signup.css"
 import instance from "../../api/axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { toast } from 'react-toastify';
+
+import { AiOutlineLoading } from "react-icons/ai";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const navigateTDashboard = useNavigate()
-  // console.log(navigateTDashboard) // navigateTDashboard("/dashboard")
-
+  const [isLoading, setIsLoading] = useState(false)
+  const [passwordVisible, setPasswordVisible] = useState(false)
   const [firstname, setFirstname] = useState("")
-  const [lastname, setLastname] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   function SignUp(e) {
-    // e.preventDefault()
+    e.preventDefault()
 
+    setIsLoading(true)
     instance.post("/auth/register", {
-      // email: email,
-      // first_name: firstname,
-      // last_name: lastname,
-      // password: password,
-
-      email: "test@example.com",
-      first_name: "John",
-      last_name: "Doe",
-      password: "password123"
+      email: email,
+      username: firstname,
+      password: password,
     })
       .then(response => {
         console.log(response.data)
+        navigateTDashboard("/login")
+        toast.success(response.message)
+        setIsLoading(false)
       })
-      .catch(error => console.log(error))
-      //  console.log(typeof (firstname), typeof (lastname), typeof (email), typeof (password))
+      .catch(error => {
+        console.log(error)
+        toast.error(error.response.data.detail)
+        setIsLoading(false)
+      })
   }
-  SignUp()
 
 
   return (
     <>
-      <div className="container">
+      <div className="container signup-wrapper">
         <div className="form-wrapper">
           <h1>Sign Up</h1>
           <form className="signup-form" onSubmit={SignUp}>
-            <input onChange={(e) => setFirstname(e.target.value)} type="text" placeholder="First Name" />
-            <input onChange={(e) => setLastname(e.target.value)} type="text" placeholder="Last Name" />
-            <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
-            <input onChange={(e) => setPassword(e.target.value)} type="password" minLength={8} placeholder="Password" />
-            <button>Click</button>
+            <input required onChange={(e) => setFirstname(e.target.value)} type="text" placeholder="username" />
+            <input required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
+            <div className="password-wrapper flex">
+              <input required type={passwordVisible ? "text" : "password"} minLength={8} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+              {passwordVisible ? <FaEye onClick={() => setPasswordVisible(false)} /> : <FaEyeSlash onClick={() => setPasswordVisible(true)} />}
+            </div>
+            <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Sign Up"}</button>
           </form>
+          <p className="redirect">Have an account? <Link to={"/login"}>Login</Link></p>
         </div>
       </div>
     </>

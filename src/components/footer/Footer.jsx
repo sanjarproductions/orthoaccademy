@@ -3,9 +3,7 @@ import "./Footer.css"
 import Logo from "/logo.png"
 import { Link } from "react-router-dom"
 
-import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
@@ -34,7 +32,7 @@ const Footer = () => {
             </ul>
             <ul>
               <li>Contact:</li>
-              <li><a href="tel:+998-90-938-09-10">+998-90-938-09-10</a></li>
+              <li><a href="tel:+998979175291">+998 97 917 52 91</a></li>
             </ul>
           </div>
 
@@ -43,10 +41,9 @@ const Footer = () => {
         <div className="flex sub-footer__flex">
           <p className="desc">© Ortho Academy 2024. Barcha huquqlari himoyalangan.</p>
           <div className="icons">
-            <a href="#"><FaFacebook /></a>
-            <a href="#"><FaTwitter /></a>
-            <a href="#"><FaLinkedin /></a>
-            <a href="https://www.instagram.com/ortho_academy_uz/"><FaInstagram /></a>
+            <a href="https://t.me/ortho_academy"><FaTelegram /></a>
+            <a href="https://www.instagram.com/moonlight_ortho_lab?igsh=MTJhbXJreDV2MmVpcw=="><FaInstagram /></a>
+            <a href="https://www.instagram.com/doc.ulugbek.abdusattarov?igsh=M3JsMm5uNTQ5dG5s&utm_source=qr"><FaInstagram /></a>
           </div>
         </div>
       </div>
