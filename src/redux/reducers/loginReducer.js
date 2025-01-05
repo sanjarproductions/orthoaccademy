@@ -3,7 +3,7 @@ const initialState = {
     token: localStorage.getItem("user-token") || "",
 }
 const loginReducer = (state = initialState, action) => {
-    console.log(action)
+    // console.log(action)
     switch (action.type) {
         case "LOGIN":
             localStorage.setItem("user-token", action.payload.data.token);
