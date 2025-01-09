@@ -12,14 +12,6 @@ const Dashboard = () => {
       .catch(err => console.log(err))
   }, []) // this one is working
 
-  // useEffect(() => {
-  //   instance(`dashboards`, {
-  //     token: token
-  //   })
-  //   .then(response => console.log(response.data))
-  //   .catch(err => console.log(err))
-  // }, []) // and this one is not working and giving an error: 422
-
   return (
     <>
       <div className="dashboard">
@@ -27,7 +19,8 @@ const Dashboard = () => {
           hi Im Dashboard
           {
             courses.map(course => 
-              console.log(course.course.video_url_list)
+              console.log(course)
+              // console.log(course.course.video_url_list)
             )
           }
         </div>

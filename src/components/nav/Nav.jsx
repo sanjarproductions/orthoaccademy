@@ -2,7 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import Logo from "/logo.png"
 import { useDispatch } from 'react-redux';
 // import instance from "../../api/axios"
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import "./Nav.css"
 
@@ -11,19 +11,14 @@ import { FaCartPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const Nav = () => {
-  const isLogged = useSelector(state => state.login.isLogged)
+  const token = localStorage.getItem("user-token")
+  // const isLogged = useSelector(state => state.login.isLogged) // this limited solution
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   function logout() {
     dispatch({ type: "LOGOUT" })
     navigate("/")
-    // instance.post(`/auth/logout`, {
-    //   email: "sanjar@gmail.com",
-    //   password: "12345678"
-    // })
-    //   .then(response => console.log(response.data))
-    //   .catch(err => console.log(err))
   }
 
   return (
@@ -47,7 +42,7 @@ const Nav = () => {
 
         </div>
 
-        {!isLogged ?
+        {!token ?
           <div className="action-btns">
             <Link className='action-btn' to={"/login"}> <FaCartPlus /> Kirish</Link>
             <Link className='action-btn' to={"/signup"}>Register</Link>
