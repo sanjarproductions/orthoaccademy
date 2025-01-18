@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 const Courses = () => {
   const [courseData, setCourseData] = useState([])
   let location = useParams()
+
   useEffect(() => {
     instance(`courses/${location.id}`)
       .then(response => setCourseData(response.data))
@@ -26,7 +27,7 @@ const Courses = () => {
               <p className="lessons-count">{courseData.video_count} video</p>
               <strong className="course-view__price">$ {courseData.price}</strong>
             </div>
-            <Link to={localStorage.getItem("user-token") ? "/dashboard" : "/signup"} className="enroll-btn">Boshlash</Link>
+            <Link to={localStorage.getItem("user-token") ? `/dashboard/${courseData.id}` : "/signup"} className="enroll-btn">Boshlash</Link>
           </div>
         </div>
       </div>

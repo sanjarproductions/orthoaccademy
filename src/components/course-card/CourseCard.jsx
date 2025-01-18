@@ -11,7 +11,7 @@ const CourseCard = () => {
     instance("courses/all", {})
       .then(response => setCards(response.data))
   }, [])
-  // console.log(cards)
+  console.log(cards)
   
   return (
     <>

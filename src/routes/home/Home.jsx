@@ -17,16 +17,6 @@ const Home = () => {
               <h1>Istalgan joyda, o&apos;zingizga qulay vaqtda o&apos;qish imkoniyati</h1>
               <p className="desc">O&apos;nlab studentlar safiga q&apos;oshiling</p>
               <Link className="signup-btn" to={"/signup"}>Register</Link>
-              {/* <div className="stats flex">
-                <div className="stat">
-                  <strong>10+</strong>
-                  <p>Students</p>
-                </div>
-                <div className="stat">
-                  <strong>100%</strong>
-                  <p>Good Reviews</p>
-                </div>
-              </div> */}
             </div>
             <div className="hero-img">
               <img src="https://cdn.pixabay.com/photo/2024/02/07/15/09/ai-generated-8559288_1280.png" alt="" width={580} />

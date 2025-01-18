@@ -1,27 +1,33 @@
 import { useEffect, useState } from "react";
 import "./Dashboard.css"
 import instance from "../../api/axios"
+import { useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 const Dashboard = () => {
-  const token = localStorage.getItem("user-token")
-  const [courses, setCourses] = useState([])
+  let token = localStorage.getItem("user-token")
+  let location = useParams()
+  const [course, setCourse] = useState([])
 
   useEffect(() => {
-    instance(`dashboards?token=${token}`)
-      .then(response => setCourses(response.data))
+    instance(`/courses/${location.id}?token=${token}`)
+      .then(response => setCourse(response.data))
       .catch(err => console.log(err))
-  }, []) // this one is working
+  }, [])
+  console.log(course)
 
   return (
     <>
       <div className="dashboard">
         <div className="container">
-          hi Im Dashboard
+          <h1>{course.title}</h1>
+          <p>{course.short_description}</p>
           {
-            courses.map(course => 
-              console.log(course)
-              // console.log(course.course.video_url_list)
+
+            course.video_url_list.map(i => 
+              <video controls src={i} key={uuidv4()}></video>
             )
+
           }
         </div>
       </div>
