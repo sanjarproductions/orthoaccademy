@@ -14,7 +14,7 @@ const Courses = () => {
       .catch(err => console.log(err))
   }, [location.id])
 
-  console.log(courseData)
+  // console.log(courseData)
   return (
     <>
       <div className="view-course container">

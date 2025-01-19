@@ -8,6 +8,7 @@ const Dashboard = () => {
   let token = localStorage.getItem("user-token")
   let location = useParams()
   const [course, setCourse] = useState([])
+  const [activeVideo, setActiveVideo] = useState(0)
 
   useEffect(() => {
     instance(`/courses/${location.id}?token=${token}`)
@@ -20,15 +21,29 @@ const Dashboard = () => {
     <>
       <div className="dashboard">
         <div className="container">
-          <h1>{course.title}</h1>
-          <p>{course.short_description}</p>
-          {
+          <div className="course-details">
+            <h1>{course.title}</h1>
+            <p>{course.short_description}</p>
+          </div>
 
-            course.video_url_list.map(i => 
-              <video controls src={i} key={uuidv4()}></video>
-            )
+          <div className="course-lessons">
 
-          }
+            <div className="course-lessons__list">
+              {
+                course?.video_url_list?.map((videoLesson, id) =>
+                  <>
+                    <video src={videoLesson} key={uuidv4()} onClick={() => { setActiveVideo(id) }}></video>
+                  </>
+                )
+              }
+            </div>
+
+
+            <div>
+              <video src={course?.video_url_list?.[activeVideo]} controls className="video-player"></video>
+            </div>
+
+          </div>
         </div>
       </div>
     </>
