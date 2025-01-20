@@ -14,7 +14,7 @@ const Dashboard = () => {
     instance(`/courses/${location.id}?token=${token}`)
       .then(response => setCourse(response.data))
       .catch(err => console.log(err))
-  }, [])
+  }, [location.id])
   console.log(course)
 
   return (
