@@ -39,7 +39,7 @@ export default App
 // log out +
 // about course page (courses/1) +
 // invoice (pay page) stripe
-// watch the course (page)
+// watch the course (page)- process
 
 // admin
 // admin / add course

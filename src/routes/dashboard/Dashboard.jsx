@@ -22,7 +22,7 @@ const Dashboard = () => {
       <div className="dashboard">
         <div className="container">
           <div className="course-details">
-            <h1>{course.title}</h1>
+            <h1 className="course-title">{course.title}</h1>
             <p>{course.short_description}</p>
           </div>
 
@@ -51,8 +51,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-
-
-// the problem: to figure out to which course a user has clicked
-// bcz we dont know,
-// in order to render a specific course we have to know a dasboard_id 
