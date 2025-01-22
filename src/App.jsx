@@ -33,22 +33,51 @@ function App() {
 export default App
 
 
+
+// profile, admin, watch the course page, payment
+
+
 // home page +
 // sign up page +
 // login page +
-// log out +
+// log out +         (timer for updating the token, do smt with redux bcz it's getting wanished after an update)
 // about course page (courses/1) +
 // invoice (pay page) stripe
-// watch the course (page)- process
+// watch the course (page) - process
+
 
 // admin
 // admin / add course
 // admin / del course
 // admin / change the course
 
-// mobile
-
 // profile page
 // profile / all courses
 // profile / logout
 // prfile / 
+
+
+// mobile
+
+
+
+
+
+
+
+
+//security
+// - "Parolni unutdingizmi?" havolasi reset-password saxifasiga olib boradi.
+
+// - **Reset-password saxifasi**:
+
+//   - Email orqali parolni tiklash formasi.
+//   - Yangi parol o'rnatish uchun havola yuboriladi.
+
+// - **One Time Password Send saxifasi**:
+
+//   - Foydalanuvchi email kiritadi va bir martalik parol yuboriladi.
+
+// - **One Time Password Verifikatsiya saxifasi**:
+
+//   - Kiritilgan parolni tasdiqlash uchun forma.

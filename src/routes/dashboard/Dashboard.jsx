@@ -4,6 +4,9 @@ import instance from "../../api/axios"
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
+
 const Dashboard = () => {
   let token = localStorage.getItem("user-token")
   let location = useParams()
@@ -15,6 +18,11 @@ const Dashboard = () => {
       .then(response => setCourse(response.data))
       .catch(err => console.log(err))
   }, [location.id])
+
+  const lessons = course.video_title?.map((title, index) => ({
+    title,
+    video: course.video_url_list[index],
+  }));
   console.log(course)
 
   return (
@@ -27,20 +35,28 @@ const Dashboard = () => {
           </div>
 
           <div className="course-lessons">
-
             <div className="course-lessons__list">
               {
-                course?.video_url_list?.map((videoLesson, id) =>
-                  <>
-                    <video src={videoLesson} key={uuidv4()} onClick={() => { setActiveVideo(id) }}></video>
-                  </>
+                lessons?.map((i, id) =>
+                  <div className="lesson" key={uuidv4()} onClick={() => { setActiveVideo(id) }}>
+                    <video src={i?.video} className="video-lesson"></video>
+                    <p className="title-lesson">{i?.title.slice(0, 25) + "..."}</p>
+                  </div>
                 )
               }
             </div>
 
-
-            <div>
+            <div className="video-player__wrapper">
               <video src={course?.video_url_list?.[activeVideo]} controls className="video-player"></video>
+              
+              <div className="video-player__btn">
+                <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo - 1) }}><IoIosArrowBack /> Oldingi </button>
+                <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo + 1) }}>Keyingi <IoIosArrowForward /></button>
+              </div>
+
+              <p>{course?.created_at}</p>
+              <p>{course?.description}</p>
+
             </div>
 
           </div>
@@ -51,3 +67,8 @@ const Dashboard = () => {
 }
 
 export default Dashboard
+
+
+// design
+// custom player
+// next vid btn
