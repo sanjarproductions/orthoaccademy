@@ -1,7 +1,10 @@
+.course-details{
+    padding-top: 50px;
+}
 .course-lessons {
     display: flex;
     align-items: start;
-    padding-top: 100px;
+    padding-top: 40px;
     gap: 50px;
 }
 
@@ -126,4 +129,31 @@
 
 .button-4:-webkit-details-marker {
     display: none;
+}
+
+/*  */
+
+
+.video-player__wrapper {
+    width: 100%;
+    max-width: 860px;
+}
+
+.video-player__wrapper .lesson-desc {
+    background: #FAFBFC;
+    color: #000;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    cursor: pointer;
+}
+
+.video-player__wrapper .lesson-desc .lesson-desc__text {
+    font-size: 14px;
+
 }
