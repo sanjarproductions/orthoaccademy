@@ -3,7 +3,7 @@ import "./Dashboard.css"
 import instance from "../../api/axios"
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-import { format } from "date-fns";
+// import { format } from "date-fns";
 
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
@@ -13,7 +13,7 @@ const Dashboard = () => {
   let location = useParams()
   const [course, setCourse] = useState([])
   const [activeVideo, setActiveVideo] = useState(0)
-  const formattedDate = format(new Date(isoDate), "dd MMMM yyyy, HH:mm:ss");
+  // const formattedDate = format(new Date(isoDate), "dd MMMM yyyy, HH:mm:ss");
 
   useEffect(() => {
     instance(`/courses/${location.id}?token=${token}`)
@@ -49,7 +49,7 @@ const Dashboard = () => {
             </div>
 
             <div className="video-player__wrapper">
-              <video src={course?.video_url_list?.[activeVideo]} controls className="video-player"></video>
+              <video controls className="video-player" src={course?.video_url_list?.[activeVideo]}></video>
 
               <div className="video-player__btn">
                 <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo - 1) }}><IoIosArrowBack /> Oldingi </button>
@@ -57,9 +57,9 @@ const Dashboard = () => {
               </div>
 
               <div className="lesson-desc">
-                <p>{course?.created_at}</p>
+                <p>{course?.created_at?.slice(0, 10)}</p>
                 <div>
-                  <p className="lesson-desc__text">{course?.description.slice(0, 150) + "..."}</p> <button>Batafsil</button>
+                  <p className="lesson-desc__text">{course?.description?.slice(0, 150) + "..."}</p> <button>Batafsil</button>
                 </div>
               </div>
 
