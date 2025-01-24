@@ -1,8 +1,6 @@
 import { Link, NavLink } from 'react-router-dom'
 import Logo from "/logo.png"
 import { useDispatch } from 'react-redux';
-// import instance from "../../api/axios"
-// import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import "./Nav.css"
 

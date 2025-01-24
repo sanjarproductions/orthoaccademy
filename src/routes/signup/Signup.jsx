@@ -52,6 +52,17 @@ const Signup = () => {
               <input required type={passwordVisible ? "text" : "password"} minLength={8} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
               {passwordVisible ? <FaEye onClick={() => setPasswordVisible(false)} /> : <FaEyeSlash onClick={() => setPasswordVisible(true)} />}
             </div>
+
+            <div className="line"></div>
+            <input  onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Full Name" />
+            <input  onChange={(e) => setEmail(e.target.value)} type="tel" placeholder="Phone" />
+            <input  onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Country/Region" />
+            <select name="rank">
+              <option value="" selected>Rank</option>
+              <option value="PhD" >PhD</option>
+              <option value="Doctor" >Doctor</option>
+            </select>
+
             <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Sign Up"}</button>
           </form>
           <p className="redirect">Have an account? <Link to={"/login"}>Login</Link></p>

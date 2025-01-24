@@ -1,0 +1,15 @@
+.user-data__wrapper {}
+
+.user-data__wrapper {
+    display: flex;
+    align-items: start;
+    gap: 50px;
+}
+
+.user-profile__icon{
+
+}
+
+.user-profile__image svg{
+font-size: 120px;
+}
