@@ -111,30 +111,61 @@ nav {
 
 /*  */
 
-/* .user-profile {} */
+.user-profile {
+    position: relative;
+    width: 120px;
+    text-align: end;
+}
 
 .user-profile:hover .profile-links {
     display: block;
 }
 
-.user-profile svg {
+.user-profile .user-profile__icon {
     width: 60px;
     height: 60px;
 }
 
 .profile-links {
-    border: 1px solid #000;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     position: absolute;
-    top: 17%;
+    width: 100%;
+    top: 57px;
     display: none;
-    padding: 10px 5px;
+    padding: 12px;
     background: #fff;
     border-radius: 5px;
 }
 
-.profile-links li, .profile-links li a {
-    color: #000;
-    margin-bottom: 0px;
-    cursor: pointer;
+.profile-links li:hover {
+    transform: scale(1.05);
+}
+
+.profile-links li:nth-child(2):hover {
     color: red;
+}
+
+.profile-links li {
+    transition: 200ms;
+    display: flex;
+    align-items: center;
+    color: #000;
+    cursor: pointer;
+    padding-bottom: 10px;
+    gap: 7px;
+}
+
+.profile-links li a {
+    color: #000;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.profile-links li:last-child {
+    padding-bottom: 0;
+}
+
+.profile-links li svg {
+    font-size: 22px;
 }

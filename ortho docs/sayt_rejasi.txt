@@ -1,0 +1,141 @@
+# Frontend Til: React
+
+
+# Sayt tuzilishi:&#x20;
+
+
+## 1. Avtorizatsiya bo'limi
+
+Avtorizatsiya bo'limi quyidagi saxifalarni o'z ichiga oladi:
+
+### Saxifalar:
+
+- **Register saxifasi**:
+
+  - Foydalanuvchilarni ro'yxatdan o'tkazish uchun forma (ism, email, parol va boshqalar).
+  - Forma yuborilganda muvaffaqiyatli yoki xato xabarni ko'rsatish.
+
+- **Login saxifasi**:
+
+  - Email va parol orqali tizimga kirish formasi.
+  - "Parolni unutdingizmi?" havolasi reset-password saxifasiga olib boradi.
+
+- **Reset-password saxifasi**:
+
+  - Email orqali parolni tiklash formasi.
+  - Yangi parol o'rnatish uchun havola yuboriladi.
+
+- **One Time Password Send saxifasi**:
+
+  - Foydalanuvchi email kiritadi va bir martalik parol yuboriladi.
+
+- **One Time Password Verifikatsiya saxifasi**:
+
+  - Kiritilgan parolni tasdiqlash uchun forma.
+
+- **Logout saxifasi**:
+
+  - Foydalanuvchini tizimdan chiqarib yuboradi.
+
+---
+
+## 2. Home saxifasi
+
+Asosiy saxifa, foydalanuvchilar uchun umumiy ko'rinishdagi kontent.
+
+### Asosiy elementlar:
+
+- **Navigatsiya paneli (Navbar)**:
+
+  - **Sayt logosi**.
+
+  - **Kurslar (nav link)**: Kurslar ro'yxati bo'limiga olib boradi.
+
+  - **Servislar (nav link)**: Servislarga tegishli ichki havolalar:
+
+    - **Ortho Academy bot (nav link)**.
+    - **Aisha bot (nav link)**.
+
+  - **Profil menu**
+
+    - **Dashboard (profil link)**: Foydalanuvchi sotib olgan kurslar sahifasi.
+    - **Profil (profil link)**: Profil sahifasiga olib boradi.
+    - **Logout (profil link)**: Tizimdan chiqish.
+
+- **Kurslar bo'limi**:
+
+  - Har bir kurs uchun kartochkalar (nomi, tavsifi va tugmalar).
+  - Kurslarga tegishli havolalar:
+    - **Kurs 1 (kurs link 1)**.
+    - **Kurs 2 (kurs link 2)**.
+
+- **Footer**:
+
+  - **Sayt logosi** (havola sifatida).
+  - **Telefon raqami**.
+  - **Ijtimoiy tarmoqlar logotiplari** (havola sifatida).
+  - **To'lov turlari logotiplari**.
+
+---
+
+## 3. Profil saxifasi
+
+Foydalanuvchi o'z ma'lumotlarini ko'rish va tahrirlash imkoniyatiga ega bo'lgan sahifa.
+
+### Asosiy imkoniyatlar:
+
+- **Profil rasmi** ko'rsatiladi.
+- **Foydalanuvchi ma'lumotlari** (ism, email, telefon raqami va boshqalar) ko'rsatiladi.
+- **Profil ma'lumotlarini tahrirlash tugmasi**.
+- **Parolni o'zgartirish tugmasi**.
+
+---
+
+## 4. Dashboard saxifasi
+
+Foydalanuvchining sotib olgan kurslari ro'yxati va ularga kirish imkoniyatini taqdim etadi.
+
+### Asosiy elementlar:
+
+- Sotib olingan kurslar ro'yxati (kartochkalar ko'rinishida):
+  - **Kurs nomi**.
+  - **Kurs rasmi**.
+  - **Kurs progress bari** (foizlarda ko'rsatiladi).
+  - **"Boshlash" yoki "Davom ettirish" tugmasi**, kursning tegishli lesson saxifasiga olib boradi.
+
+---
+
+## 5. Lesson saxifasi
+
+Tanlangan kursning darslari ro'yxatini ko'rsatadigan sahifa.
+
+### Asosiy elementlar:
+
+- **Kurs nomi** va umumiy tavsifi.
+
+- Darsning progress bari (darsning qancha qismi ko'rilganligini ko'rsatadi)
+
+- **Darslar ro'yxati**:
+
+  - Har bir dars uchun nom ("havola ko'rinishida").
+  - Tugmalar tegishli video ga olib boradi.
+
+- **Video player**:
+
+  - Chap tomonda darslar ro'yxati.
+
+- **Navigatsiya tugmalari**:
+
+  - Birinchi dars bo'lsa, faqat "Keyingisi" tugmasi ko'rsatiladi.
+  - Aks holda, "Ortga" va "Keyingisi" tugmalari mavjud.
+
+- **Xavfsizlik choralari**:
+
+  - Skrinshot olish imkoniyati bloklanadi.
+  - Ekranni yozib olish imkoniyati cheklanadi.
+  - Videoni yuklab olish imkoni bo'lmaydi.
+
+---
+
+Bu tuzilma asosida har bir sahifani dizayn qilish va foydalanuvchi tajribasini optimallashtirish uchun zarur bo'lgan barcha asosiy elementlar va funksiyalar aniqlangan. Agar qo'shimcha savollar yoki aniqlik kiritish zarur bo'lsa, murojaat qilishingiz mumkin.
+

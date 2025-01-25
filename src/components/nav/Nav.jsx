@@ -7,6 +7,8 @@ import "./Nav.css"
 import { MdAccountCircle } from "react-icons/md";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { FiLogOut } from "react-icons/fi";
+import { MdOutlineAccountCircle } from "react-icons/md";
 
 const Nav = () => {
   const token = localStorage.getItem("user-token")
@@ -49,8 +51,8 @@ const Nav = () => {
           <div className='user-profile'>
             <MdAccountCircle className='user-profile__icon' />
             <ul className="profile-links">
-              <li onClick={logout}>Log Out</li>
-              <li><Link to={"/profile"}>Profile</Link></li>
+              <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profile</Link></li>
+              <li onClick={logout}> <FiLogOut className='logout-icon__link'/> Log out</li>
             </ul>
           </div>}
       </div>
