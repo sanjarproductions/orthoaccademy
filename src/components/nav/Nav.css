@@ -111,7 +111,7 @@ nav {
 
 /*  */
 
-.user-profile {}
+/* .user-profile {} */
 
 .user-profile:hover .profile-links {
     display: block;
@@ -132,7 +132,7 @@ nav {
     border-radius: 5px;
 }
 
-.profile-links li {
+.profile-links li, .profile-links li a {
     color: #000;
     margin-bottom: 0px;
     cursor: pointer;

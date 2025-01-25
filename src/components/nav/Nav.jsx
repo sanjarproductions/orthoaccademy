@@ -50,6 +50,7 @@ const Nav = () => {
             <MdAccountCircle className='user-profile__icon' />
             <ul className="profile-links">
               <li onClick={logout}>Log Out</li>
+              <li><Link to={"/profile"}>Profile</Link></li>
             </ul>
           </div>}
       </div>

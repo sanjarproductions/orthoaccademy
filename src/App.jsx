@@ -11,6 +11,7 @@ import Course from './routes/course/Course'
 import Login from './routes/login/Login'
 import Signup from './routes/signup/Signup'
 import Dashboard from './routes/dashboard/Dashboard'
+import Admin from './routes/admin/Admin'
 
 import { ToastContainer } from "react-toastify"
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/profile' element={<UserProfile/>}/>
+        <Route path='/admin' element={<Admin/>}/>
         <Route path='/dashboard/:id' element={<Dashboard />} />
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
