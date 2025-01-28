@@ -7,7 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 
 const UserProfile = () => {
     let token = localStorage.getItem("user-token")
-    const [userProfileData, setUserProfileData] = useState(null)
+    const [userProfileData, setUserProfileData] = useState({})
     useEffect(() => {
         instance(`/users/profile?token=${token}`)
             .then(response => setUserProfileData(response.data))
@@ -22,19 +22,19 @@ const UserProfile = () => {
 
                     <div className="user-profile__image">
                         <MdAccountCircle className='user-profile__icon' />
-
+                        <img src={userProfileData?.profile_pic} alt="" />
                     </div>
 
                     <div className="user-profile__data">
                         <p>Full Name: {userProfileData?.full_name ? userProfileData?.full_name : "No Name"}</p>
                         <p>username: {userProfileData?.username}</p>
                         <br />
-                        <p>Phone: {userProfileData?.phone ? userProfileData?.phone : "No Phone"}</p>
+                        <p>Phone: {userProfileData?.phone ? userProfileData?.phone : "No Phone Number given"}</p>
                         <p>Email: {userProfileData?.email}</p>
                         <br />
-                        <p>Data: {userProfileData?.registred_at}</p>
-                        <p>Rank: {userProfileData?.rank ? userProfileData?.rank : "No Rank"}</p>
-                        <p>Region: {userProfileData?.region ? userProfileData?.region : "No Region"}</p>
+                        <p>Date: {userProfileData?.registred_at}</p>
+                        <p>Rank: {userProfileData?.rank ? userProfileData?.rank : "No Data"}</p>
+                        <p>Region: {userProfileData?.region ? userProfileData?.region : "No Data "}</p>
                     </div>
                 </div>
             </div>
