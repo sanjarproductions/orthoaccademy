@@ -2,7 +2,7 @@
 import "./userProfile.css"
 import instance from "../../api/axios"
 import { useEffect, useState } from "react"
-
+import { Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 
 const UserProfile = () => {
@@ -20,9 +20,9 @@ const UserProfile = () => {
             <div className="container">
                 <div className="user-data__wrapper">
 
-                    <div className="user-profile__image">
-                        <MdAccountCircle className='user-profile__icon' />
-                        <img src={userProfileData?.profile_pic} alt="" />
+                    <div className="">
+                        <Link to={"/"}></Link>
+                        <p>Kurslarim</p>
                     </div>
 
                     <div className="user-profile__data">
@@ -36,6 +36,14 @@ const UserProfile = () => {
                         <p>Rank: {userProfileData?.rank ? userProfileData?.rank : "No Data"}</p>
                         <p>Region: {userProfileData?.region ? userProfileData?.region : "No Data "}</p>
                     </div>
+
+
+                    <div className="user-profile__image">
+                        <MdAccountCircle className='user-profile__icon' />
+                        <img src={userProfileData?.profile_pic} alt="" />
+                    </div>
+
+
                 </div>
             </div>
         </div>
