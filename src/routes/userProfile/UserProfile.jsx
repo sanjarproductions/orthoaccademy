@@ -3,6 +3,9 @@ import "./userProfile.css"
 import instance from "../../api/axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import RandomPersonPhoto from "../../assets/img.jpeg"
+
+import { IoBookSharp } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 
 const UserProfile = () => {
@@ -20,28 +23,63 @@ const UserProfile = () => {
             <div className="container">
                 <div className="user-data__wrapper">
 
-                    <div className="">
-                        <Link to={"/"}></Link>
-                        <p>Kurslarim</p>
+                    <div className="profile-sidebar">
+                        <Link to={"/"}><MdAccountCircle /> Akkaunt</Link>
+                        <Link to={"/"}><IoBookSharp /> Kurslar</Link>
+                        {/* <Link to={"/"}><IoBookSharp /> Kurslar</Link> */}
+                        {/* <Link to={"/"}><IoBookSharp /> Kurslar</Link> */}
+                        {/* <Link to={"/"}><IoBookSharp /> Kurslar</Link> */}
+                        {/* <Link to={"/"}><IoBookSharp /> Kurslar</Link> */}
+                        {/* <Link to={"/"}><IoBookSharp /> Kurslar</Link> */}
                     </div>
 
-                    <div className="user-profile__data">
-                        <p>Full Name: {userProfileData?.full_name ? userProfileData?.full_name : "No Name"}</p>
-                        <p>username: {userProfileData?.username}</p>
-                        <br />
-                        <p>Phone: {userProfileData?.phone ? userProfileData?.phone : "No Phone Number given"}</p>
-                        <p>Email: {userProfileData?.email}</p>
-                        <br />
-                        <p>Date: {userProfileData?.registred_at}</p>
-                        <p>Rank: {userProfileData?.rank ? userProfileData?.rank : "No Data"}</p>
-                        <p>Region: {userProfileData?.region ? userProfileData?.region : "No Data "}</p>
-                    </div>
+                    <div className="main-user__data">
+                        <div className="user-profile__data">
+
+                            <div className="smt">
+                                <p>Name:</p>
+                                <p>{userProfileData?.full_name ? userProfileData?.full_name : "No Name"}</p>
+                            </div>
+
+                            <div className="smt">
+                                <p>Username:</p>
+                                <p>{userProfileData?.username}</p>
+                            </div>
+
+                            <div className="smt">
+                                <p>Phone:</p>
+                                <p>{userProfileData?.phone ? userProfileData?.phone : "No Phone Number given"}</p>
+                            </div>
+
+                            <div className="smt">
+                                <p>Email:</p>
+                                <p>{userProfileData?.email}</p>
+                            </div>
+
+                            <div className="smt">
+                                <p>Date:</p>
+                                <p>{userProfileData?.registred_at}</p>
+                            </div>
+
+                            <div className="smt">
+                                <p>Rank:</p>
+                                <p>{userProfileData?.rank ? userProfileData?.rank : "No Data"}</p>
+                            </div>
+
+                            <div className="smt">
+                                <p>Region:</p>
+                                <p>{userProfileData?.region ? userProfileData?.region : "No Data "}</p>
+                            </div>
+
+                        </div>
 
 
-                    <div className="user-profile__image">
-                        <MdAccountCircle className='user-profile__icon' />
-                        <img src={userProfileData?.profile_pic} alt="" />
+                        <div className="user-profile__image">
+                            <img className="profile-photo" src={userProfileData?.profile_pic == "default_profile_pic.jpg" ? RandomPersonPhoto : userProfileData?.profile_pic == "default_profile_pic.jpg"} alt="" />
+                        </div>
+
                     </div>
+
 
 
                 </div>
@@ -52,43 +90,3 @@ const UserProfile = () => {
 
 export default UserProfile
 
-
-// full_name
-// : 
-// null
-
-// id
-// : 
-// 3
-
-// is_active
-// : 
-// true
-
-// is_email_verified
-// : 
-// false
-
-// phone
-// : 
-// null
-
-// profile_pic
-// : 
-// "default_profile_pic.jpg"
-
-// ranks
-// : 
-// null
-
-// region
-// : 
-// null
-
-// registred_at
-// : 
-// "2024-12-22T08:12:29.679674"
-
-// username
-// : 
-// "test"

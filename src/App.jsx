@@ -40,11 +40,15 @@ export default App
 
 // profile, admin, watch the course page, payment
 
+// fix the problem with the footer's styles
+// fix the proble with token getting old & etc
+// have to make a sceleton (home page, what the course, course/1)
 
 // home page +
 // sign up page +
 // login page +
 // log out +         (timer for updating the token, do smt with redux bcz it's getting wanished after an update)
+
 // about course page (courses/1) +
 // invoice (pay page) stripe
 // watch the course (page) - process
@@ -62,6 +66,8 @@ export default App
 
 
 // mobile
+
+
 
 
 
