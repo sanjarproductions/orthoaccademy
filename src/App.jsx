@@ -27,6 +27,7 @@ function App() {
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/profile/courses' element={<UserProfile/>}></Route>
       </Routes>
       <Footer />
       <ToastContainer limit={2} />
