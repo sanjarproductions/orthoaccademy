@@ -12,7 +12,8 @@ import { MdDone } from "react-icons/md";
 const UserProfile = () => {
     let token = localStorage.getItem("user-token")
     const [userProfileData, setUserProfileData] = useState({})
-    const [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState({})
+    const [inputValue, setInputValue] = useState({})
 
     useEffect(() => {
         instance(`/users/profile?token=${token}`)
@@ -20,17 +21,13 @@ const UserProfile = () => {
             .catch(err => console.log(err))
     }, [token])
 
-    function updateProfile() {
-        instance.patch(`/users/profile/update?token=${token}`, {
-            full_name: "John Doe",
-            // email: "new@new.com",
-            // new_password: "new_password",
-            // phone: "+998901234567",
-            // ranks: "Magister",
-            // region: "Tashkent",
-            // username: "newuser"
-        })
-            .then(response => console.log(response.data))
+    function updateProfile(fieldKey) {
+        instance.patch(`/users/profile/update?token=${token}`, { [fieldKey]: inputValue[fieldKey] })
+            .then(response => 
+                console.log(response.data),
+                setUserProfileData({ ...userProfileData, [fieldKey]: inputValue[fieldKey] }),
+                setEditMode({ ...editMode, [fieldKey]: false }) // Close only the edited field
+            )
             .catch(err => console.log(err))
     }
 
@@ -42,6 +39,7 @@ const UserProfile = () => {
         { label: "Rank", key: "rank" },
         { label: "Region", key: "region" }
     ];
+
 
     return (
         <div>
@@ -56,20 +54,20 @@ const UserProfile = () => {
                     <div className="main-content">
                         <div className="user-wrapper">
                             {
-                                fields.map(i =>
+                                fields.map(({ label, key }) =>
                                     <>
                                         <div className="user-data">
-                                            <label>{i.label}:</label>
+                                            <label>{label}:</label>
                                             <div className="box">
                                                 {
-                                                    editMode ? (
-                                                        <input type="text" />
-                                                    ) : (<p>{userProfileData[i.key] || "No Data"}</p>)
+                                                    editMode[key] ? (
+                                                        <input type="text" value={ inputValue[key] || userProfileData[key] || "Enter"} onChange={(e) => setInputValue({ ...inputValue, [key]: e.target.value })} />
+                                                    ) : (<p>{userProfileData[key] || "No Data"}</p>)
                                                 }
                                                 {
-                                                    editMode ? (
-                                                        <MdDone onClick={() => updateProfile()} />
-                                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(!editMode)} />)
+                                                    editMode[key] ? (
+                                                        <MdDone onClick={() => updateProfile(key)} />
+                                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode((prev) => ({ ...prev, [key]: !prev[key] }))} />)
                                                 }
                                             </div>
                                         </div>
