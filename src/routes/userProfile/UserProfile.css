@@ -16,7 +16,6 @@
     justify-content: start;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
-    /* padding: 10px; */
     max-width: 200px;
     width: 100%;
     padding: 5px 5px;
@@ -34,7 +33,6 @@
 
 .profile-sidebar a:hover {
     background: #00000016;
-    /* transform: scale(1.1); */
 }
 
 .profile-sidebar a svg {
@@ -63,22 +61,22 @@
     width: 240px;
 }
 
-.main-user__data .wrapper .data p:first-child {
-    padding-bottom: 10px;
+.main-user__data .wrapper .data label{
+    /* padding-bottom: 10px; */
 }
 
 .main-user__data .wrapper .data .data-box {
     display: flex;
     gap: 10px;
-    /* align-items: end; */
 }
 
 .main-user__data .wrapper .data .data-box p {
-    /* border-bottom: 1px solid #000000b7; */
     padding: 10px 15px;
     transition: 200ms;
     width: 80%;
     outline: none;
+    margin-top: 10px;
+
 }
 
 .main-user__data .wrapper .data .data-box svg {

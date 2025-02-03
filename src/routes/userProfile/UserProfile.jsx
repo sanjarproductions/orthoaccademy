@@ -11,10 +11,10 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
 
 const UserProfile = () => {
-
     let token = localStorage.getItem("user-token")
     const [userProfileData, setUserProfileData] = useState({})
-    const [fullNameEdit, setFullNameEdit] = useState(false)
+    // const [fullNameEdit, setFullNameEdit] = useState(false)
+    const [editMode, setEditMode] = useState(null)
 
     useEffect(() => {
         instance(`/users/profile?token=${token}`)
@@ -22,12 +22,33 @@ const UserProfile = () => {
             .catch(err => console.log(err))
     }, [token])
 
-    // /users/profile/update (patch)
-    // /users/profile/update (put)
+    function updateProfile() {
+        instance.patch(`/users/profile/update?token=${token}`, {
+            // email: "new@new.com",
+            full_name: "John Doe",
+            // new_password: "new_password",
+            // phone: "+998901234567",
+            // ranks: "Magister",
+            // region: "Tashkent",
+            // username: "newuser"
+        })
+            .then(response => console.log(response.data))
+            .catch(err => console.log(err))
+    }
+
+    const fields = [
+        { label: "Name", key: "full_name" },
+        { label: "Username", key: "username" },
+        { label: "Phone", key: "phone" },
+        { label: "Email", key: "email" },
+        { label: "Rank", key: "rank" },
+        { label: "Region", key: "region" }
+    ];
 
     return (
         <div>
             <div className="container">
+                {/* <button onClick={() => changeData()}>Click</button> */}
                 <div className="user-data__wrapper">
 
                     <div className="profile-sidebar">
@@ -37,54 +58,62 @@ const UserProfile = () => {
 
                     <div className="main-user__data">
 
-                        <div className="wrapper">
-
-                            <div className="data">
-                                <p className="data-title">Name:</p>
-
-                                <div className="flex data-box">
-                                    <p contentEditable={fullNameEdit} style={fullNameEdit ? { border: "2px solid #0077ff", borderRadius: 10 + "px" } : { borderBottom: "1px solid #000000b7" }}>{userProfileData?.full_name ? userProfileData?.full_name : "No Data"}</p>
-
-                                    {fullNameEdit ?  <MdDone onClick={() => setFullNameEdit(!fullNameEdit)}  />  : <FaRegEdit className="edit-btn" onClick={() => setFullNameEdit(!fullNameEdit)} />}
-
+                    {
+                        fields.map(i => 
+                            <>
+                                <div>
+                                    <label>{i.label}</label>
+                                    <p>{i.key}</p>
                                 </div>
+                            </>
+                        )
+                    }
 
+                        {/* <div className="wrapper">
+                            <div className="data">
+                                <label className="data-title">Name:</label>
+                                <div className="flex data-box">
+                                    <p contentEditable={fullNameEdit} style={fullNameEdit ? { border: "2px solid #0077ff", borderRadius: 10 + "px" } : { borderBottom: "1px solid #000000b7" }}> {userProfileData?.full_name ? userProfileData?.full_name : "No Data"} </p>
+                                    {fullNameEdit ? <MdDone onClick={() => setFullNameEdit(!fullNameEdit)} /> : <FaRegEdit className="edit-btn" onClick={() => setFullNameEdit(!fullNameEdit)} />}
+                                </div>
                             </div>
 
                             <div className="data">
-                                <p>Username:</p>
+                                <label>Username:</label>
                                 <p>{userProfileData?.username}</p>
                             </div>
 
                             <div className="data">
-                                <p>Phone:</p>
+                                <label>Phone:</label>
                                 <p>{userProfileData?.phone ? userProfileData?.phone : "No Data"}</p>
                             </div>
 
                             <div className="data">
-                                <p>Email:</p>
+                                <label>Email:</label>
                                 <p>{userProfileData?.email}</p>
                             </div>
 
                             <div className="data">
-                                <p>Rank:</p>
+                                <label>Rank:</label>
                                 <p>{userProfileData?.rank ? userProfileData?.rank : "No Data"}</p>
                             </div>
 
                             <div className="data">
-                                <p>Region:</p>
+                                <label>Region:</label>
                                 <p>{userProfileData?.region ? userProfileData?.region : "No Data "}</p>
                             </div>
 
+                        </div> */}
+
+
+                        <div>
+                            <img className="profile-photo"
+                                src={userProfileData?.profile_pic === "default_profile_pic.jpg"
+                                    ? RandomPersonPhoto
+                                    : userProfileData?.profile_pic}
+                                alt="User Profile" />
+                            <FaRegEdit />
                         </div>
-
-
-                        <div className="">
-                            <img className="profile-photo" src={userProfileData?.profile_pic == "default_profile_pic.jpg" ? RandomPersonPhoto : userProfileData?.profile_pic == "default_profile_pic.jpg"} alt="" />
-                            <FaRegEdit onClick={() => setFullNameEdit(!false)} />
-
-                        </div>
-
                     </div>
 
 
