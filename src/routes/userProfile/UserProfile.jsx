@@ -1,9 +1,8 @@
-// import React from 'react'
 import "./userProfile.css"
-import instance from "../../api/axios"
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"
 import RandomPersonPhoto from "../../assets/img.jpeg"
+import instance from "../../api/axios"
 
 import { IoBookSharp } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
@@ -13,8 +12,7 @@ import { MdDone } from "react-icons/md";
 const UserProfile = () => {
     let token = localStorage.getItem("user-token")
     const [userProfileData, setUserProfileData] = useState({})
-    // const [fullNameEdit, setFullNameEdit] = useState(false)
-    const [editMode, setEditMode] = useState(null)
+    const [editMode, setEditMode] = useState(false)
 
     useEffect(() => {
         instance(`/users/profile?token=${token}`)
@@ -24,8 +22,8 @@ const UserProfile = () => {
 
     function updateProfile() {
         instance.patch(`/users/profile/update?token=${token}`, {
-            // email: "new@new.com",
             full_name: "John Doe",
+            // email: "new@new.com",
             // new_password: "new_password",
             // phone: "+998901234567",
             // ranks: "Magister",
@@ -48,7 +46,6 @@ const UserProfile = () => {
     return (
         <div>
             <div className="container">
-                {/* <button onClick={() => changeData()}>Click</button> */}
                 <div className="user-data__wrapper">
 
                     <div className="profile-sidebar">
@@ -56,63 +53,38 @@ const UserProfile = () => {
                         <Link to={"/profile/courses"}><IoBookSharp /> Kurslar</Link>
                     </div>
 
-                    <div className="main-user__data">
+                    <div className="main-content">
+                        <div className="user-wrapper">
+                            {
+                                fields.map(i =>
+                                    <>
+                                        <div className="user-data">
+                                            <label>{i.label}:</label>
+                                            <div className="box">
+                                                {
+                                                    editMode ? (
+                                                        <input type="text" />
+                                                    ) : (<p>{userProfileData[i.key] || "No Data"}</p>)
+                                                }
+                                                {
+                                                    editMode ? (
+                                                        <MdDone onClick={() => updateProfile()} />
+                                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(!editMode)} />)
+                                                }
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            }
+                        </div>
 
-                    {
-                        fields.map(i => 
-                            <>
-                                <div>
-                                    <label>{i.label}</label>
-                                    <p>{i.key}</p>
-                                </div>
-                            </>
-                        )
-                    }
-
-                        {/* <div className="wrapper">
-                            <div className="data">
-                                <label className="data-title">Name:</label>
-                                <div className="flex data-box">
-                                    <p contentEditable={fullNameEdit} style={fullNameEdit ? { border: "2px solid #0077ff", borderRadius: 10 + "px" } : { borderBottom: "1px solid #000000b7" }}> {userProfileData?.full_name ? userProfileData?.full_name : "No Data"} </p>
-                                    {fullNameEdit ? <MdDone onClick={() => setFullNameEdit(!fullNameEdit)} /> : <FaRegEdit className="edit-btn" onClick={() => setFullNameEdit(!fullNameEdit)} />}
-                                </div>
-                            </div>
-
-                            <div className="data">
-                                <label>Username:</label>
-                                <p>{userProfileData?.username}</p>
-                            </div>
-
-                            <div className="data">
-                                <label>Phone:</label>
-                                <p>{userProfileData?.phone ? userProfileData?.phone : "No Data"}</p>
-                            </div>
-
-                            <div className="data">
-                                <label>Email:</label>
-                                <p>{userProfileData?.email}</p>
-                            </div>
-
-                            <div className="data">
-                                <label>Rank:</label>
-                                <p>{userProfileData?.rank ? userProfileData?.rank : "No Data"}</p>
-                            </div>
-
-                            <div className="data">
-                                <label>Region:</label>
-                                <p>{userProfileData?.region ? userProfileData?.region : "No Data "}</p>
-                            </div>
-
-                        </div> */}
-
-
-                        <div>
+                        <div className="profile-photo__wrapper">
                             <img className="profile-photo"
                                 src={userProfileData?.profile_pic === "default_profile_pic.jpg"
                                     ? RandomPersonPhoto
                                     : userProfileData?.profile_pic}
                                 alt="User Profile" />
-                            <FaRegEdit />
+                            {/* <FaRegEdit /> */}
                         </div>
                     </div>
 
