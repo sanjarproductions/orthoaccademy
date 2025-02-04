@@ -41,6 +41,7 @@
 }
 
 
+
 .profile-photo {
     max-width: 200px;
     max-height: 200px;
@@ -50,14 +51,18 @@
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+
+
+
+/*  Main Content  */
+
+
 .main-content {
     display: flex;
     align-items: start;
     justify-content: space-around;
+    width: 100%;
 }
-
-
-/*  Main Content  */
 
 .user-data .box {
     display: flex;
@@ -65,4 +70,45 @@
 
 .user-data .box svg {
     cursor: pointer;
+}
+
+.main-content .user-data {
+    padding-bottom: 50px;
+}
+
+.main-content .user-data label {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.main-content .user-data .box {
+    padding-top: 20px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #00000021;
+    padding-bottom: 15px;
+}
+
+.main-content .user-data .box input {
+    outline: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    border: 1px solid #00000096;
+}
+
+.user-data .box svg {
+    transition: 200ms;
+}
+
+.user-data .box svg:hover {
+    transform: scale(1.2);
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+}
+
+.user-data .box svg:active {
+    transform: scale(1.1);
 }

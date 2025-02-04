@@ -18,6 +18,7 @@ const Nav = () => {
   // const isLogged = useSelector(state => state.login.isLogged) // this limited solution
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [profilePic, setProfilePic] = useState("")
 
   const [userProfileData, setUserProfileData] = useState({})
   useEffect(() => {
@@ -26,6 +27,12 @@ const Nav = () => {
       .catch(err => console.log(err))
   }, [token])
   // console.log(userProfileData)
+
+  useEffect(() => {
+    fetch(`https://ui-avatars.com/api/?name=${userProfileData.full_name}`)
+      .then(response => response.url)
+      .then(data => setProfilePic(data))
+  }, [userProfileData.full_name])
 
   function logout() {
     dispatch({ type: "LOGOUT" })
@@ -61,7 +68,9 @@ const Nav = () => {
           :
           <div className='user-profile'>
             {/* <MdAccountCircle className='user-profile__icon' /> */}
-            <img className='user-profile__icon' src={userProfileData?.profile_pic == "default_profile_pic.jpg" ? RandomPersonPhoto : userProfileData?.profile_pic == "default_profile_pic.jpg"} alt="" />
+
+            <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? userProfileData.profile_pic : profilePic} alt="User Profile" />
+
             <ul className="profile-links">
               <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profile</Link></li>
               <li onClick={logout}> <FiLogOut className='logout-icon__link' /> Log out</li>

@@ -4,9 +4,11 @@ import './App.css'
 
 import Nav from './components/nav/Nav'
 import Footer from './components/footer/Footer'
+import ScrollToTop from './components/scrollToTop/scrollToTop'
 
 import Home from './routes/home/Home'
 import UserProfile from './routes/userProfile/UserProfile'
+import UserCourses from './routes/userCourses/userCourses'
 import Course from './routes/course/Course'
 import Login from './routes/login/Login'
 import Signup from './routes/signup/Signup'
@@ -18,17 +20,21 @@ import { ToastContainer } from "react-toastify"
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Nav />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/profile' element={<UserProfile/>}/>
-        <Route path='/admin' element={<Admin/>}/>
+        <Route path='/admin' element={<Admin />} />
         <Route path='/dashboard/:id' element={<Dashboard />} />
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/profile/courses' element={<UserProfile/>}></Route>
+
+        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/profile/courses' element={<UserCourses />} />
+
       </Routes>
+
       <Footer />
       <ToastContainer limit={2} />
     </>

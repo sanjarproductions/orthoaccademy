@@ -1,8 +1,8 @@
 import "./userProfile.css"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react"
-import RandomPersonPhoto from "../../assets/img.jpeg"
 import instance from "../../api/axios"
+import { toast } from 'react-toastify';
 
 import { IoBookSharp } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
@@ -14,6 +14,7 @@ const UserProfile = () => {
     const [userProfileData, setUserProfileData] = useState({})
     const [editMode, setEditMode] = useState({})
     const [inputValue, setInputValue] = useState({})
+    const [profilePic, setProfilePic] = useState("")
 
     useEffect(() => {
         instance(`/users/profile?token=${token}`)
@@ -21,14 +22,24 @@ const UserProfile = () => {
             .catch(err => console.log(err))
     }, [token])
 
+    useEffect(() => {
+        fetch(`https://ui-avatars.com/api/?name=${userProfileData.full_name}`)
+            .then(response => response.url)
+            .then(data => setProfilePic(data))
+    }, [userProfileData.full_name])
+
     function updateProfile(fieldKey) {
         instance.patch(`/users/profile/update?token=${token}`, { [fieldKey]: inputValue[fieldKey] })
-            .then(response => 
+            .then(response => {
                 console.log(response.data),
-                setUserProfileData({ ...userProfileData, [fieldKey]: inputValue[fieldKey] }),
-                setEditMode({ ...editMode, [fieldKey]: false }) // Close only the edited field
-            )
-            .catch(err => console.log(err))
+                    setUserProfileData(prev => ({ ...prev, [fieldKey]: inputValue[fieldKey] })),
+                    setEditMode(prev => ({ ...prev, [fieldKey]: false })),
+                    toast.success("Updated!")
+            })
+            .catch(err => {
+                console.log(err);
+                toast.error("Try again later")
+            });
     }
 
     const fields = [
@@ -54,35 +65,30 @@ const UserProfile = () => {
                     <div className="main-content">
                         <div className="user-wrapper">
                             {
-                                fields.map(({ label, key }) =>
-                                    <>
-                                        <div className="user-data">
-                                            <label>{label}:</label>
-                                            <div className="box">
-                                                {
-                                                    editMode[key] ? (
-                                                        <input type="text" value={ inputValue[key] || userProfileData[key] || "Enter"} onChange={(e) => setInputValue({ ...inputValue, [key]: e.target.value })} />
-                                                    ) : (<p>{userProfileData[key] || "No Data"}</p>)
-                                                }
-                                                {
-                                                    editMode[key] ? (
-                                                        <MdDone onClick={() => updateProfile(key)} />
-                                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode((prev) => ({ ...prev, [key]: !prev[key] }))} />)
-                                                }
-                                            </div>
+                                fields.map(({ label, key, }) =>
+                                    // if you are gonna add a fragment here, then add a key to that fragment
+                                    <div className="user-data" key={key}>
+                                        <label>{label}:</label>
+                                        <div className="box">
+                                            {
+                                                editMode[key] ? (
+                                                    <input type="text" value={inputValue[key] || userProfileData[key] || ""} onChange={(e) => setInputValue({ ...inputValue, [key]: e.target.value })} />
+                                                ) : (<p>{userProfileData[key] || "No Data"}</p>)
+                                            }
+                                            {
+                                                editMode[key] ? (
+                                                    <MdDone onClick={() => updateProfile(key)} />
+                                                ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(prev => ({ ...prev, [key]: !prev[key] }))} />)
+                                            }
                                         </div>
-                                    </>
+                                    </div>
                                 )
                             }
                         </div>
 
                         <div className="profile-photo__wrapper">
                             <img className="profile-photo"
-                                src={userProfileData?.profile_pic === "default_profile_pic.jpg"
-                                    ? RandomPersonPhoto
-                                    : userProfileData?.profile_pic}
-                                alt="User Profile" />
-                            {/* <FaRegEdit /> */}
+                                src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? userProfileData.profile_pic : profilePic} alt="User Profile" />
                         </div>
                     </div>
 
