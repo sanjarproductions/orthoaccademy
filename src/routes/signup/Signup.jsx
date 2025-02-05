@@ -13,9 +13,13 @@ const Signup = () => {
   const navigateTDashboard = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [passwordVisible, setPasswordVisible] = useState(false)
-  const [firstname, setFirstname] = useState("")
+  const [userName, setUserName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [fullName, setFullName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [region, setRegion] = useState("")
+  const [rank, setRank] = useState("")
 
   function SignUp(e) {
     e.preventDefault()
@@ -23,7 +27,11 @@ const Signup = () => {
     setIsLoading(true)
     instance.post("/auth/register", {
       email: email,
-      username: firstname,
+      first_name: fullName,
+      phone: phone,
+      ranks: rank,
+      region: region,
+      username: userName,
       password: password,
     })
       .then(response => {
@@ -46,7 +54,7 @@ const Signup = () => {
         <div className="form-wrapper">
           <h1>Sign Up</h1>
           <form className="signup-form" onSubmit={SignUp}>
-            <input required onChange={(e) => setFirstname(e.target.value)} type="text" placeholder="username" />
+            <input required onChange={(e) => setUserName(e.target.value)} type="text" placeholder="username" />
             <input required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
             <div className="password-wrapper flex">
               <input required type={passwordVisible ? "text" : "password"} minLength={8} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
@@ -54,14 +62,10 @@ const Signup = () => {
             </div>
 
             <div className="line"></div>
-            <input  onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Full Name" />
-            <input  onChange={(e) => setEmail(e.target.value)} type="tel" placeholder="Phone" />
-            <input  onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Country/Region" />
-            <select name="rank">
-              <option value="" selected>Rank</option>
-              <option value="PhD" >PhD</option>
-              <option value="Doctor" >Doctor</option>
-            </select>
+            <input onChange={(e) => setFullName(e.target.value)} type="text" placeholder="Full Name" />
+            <input onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="+998()" />
+            <input onChange={(e) => setRegion(e.target.value)} type="text" placeholder="Country/Region" />
+            <input onChange={(e) => setRank(e.target.value)} type="text" placeholder="Rank" />
 
             <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Sign Up"}</button>
           </form>

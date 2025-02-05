@@ -1,6 +1,4 @@
-.hero {
-    background: #F4F4F4;
-}
+.hero {}
 
 .hero .container .flex:first-child {
     justify-content: space-between;
@@ -56,18 +54,8 @@
     position: relative;
 }
 
-.hero-img img:first-child {
-    position: relative;
-    z-index: 1;
-    bottom: 0;
-    margin-bottom: -4px;
-}
-
-.hero-img-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+.hero-img img {
+    width: 100%;
 }
 
 .cards {

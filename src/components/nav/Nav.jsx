@@ -2,12 +2,10 @@ import { Link, NavLink } from 'react-router-dom'
 import Logo from "/logo.png"
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import RandomPersonPhoto from "../../assets/img.jpeg"
 import { useState, useEffect } from 'react';
 import instance from '../../api/axios';
 import "./Nav.css"
 
-// import { MdAccountCircle } from "react-icons/md";
 import { FaCartPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
@@ -19,20 +17,21 @@ const Nav = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [profilePic, setProfilePic] = useState("")
-
   const [userProfileData, setUserProfileData] = useState({})
+
   useEffect(() => {
+    if (!token) return
     instance(`/users/profile?token=${token}`)
       .then(response => setUserProfileData(response.data))
       .catch(err => console.log(err))
   }, [token])
-  // console.log(userProfileData)
 
   useEffect(() => {
+    if (!token || !userProfileData.full_name) return
     fetch(`https://ui-avatars.com/api/?name=${userProfileData.full_name}`)
-      .then(response => response.url)
-      .then(data => setProfilePic(data))
-  }, [userProfileData.full_name])
+      .then(response => response.json)
+      .then(data => setProfilePic(data.url))
+  }, [userProfileData.full_name, token])
 
   function logout() {
     dispatch({ type: "LOGOUT" })
@@ -67,10 +66,7 @@ const Nav = () => {
           </div>
           :
           <div className='user-profile'>
-            {/* <MdAccountCircle className='user-profile__icon' /> */}
-
             <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? userProfileData.profile_pic : profilePic} alt="User Profile" />
-
             <ul className="profile-links">
               <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profile</Link></li>
               <li onClick={logout}> <FiLogOut className='logout-icon__link' /> Log out</li>

@@ -41,7 +41,8 @@ const UserProfile = () => {
                 toast.error("Try again later")
             });
     }
-
+    console.log(userProfileData)
+    
     const fields = [
         { label: "Name", key: "full_name" },
         { label: "Username", key: "username" },

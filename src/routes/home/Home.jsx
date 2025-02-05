@@ -1,13 +1,10 @@
 import CourseCard from "../../components/course-card/CourseCard"
-import HeroBgImg from "/hero-img-bg.png"
-import "./Home.css"
+import Hero from "../../assets/hero.png"
 import { Link } from "react-router-dom"
-
+import "./Home.css"
 
 const Home = () => {
-  // import { useState, useEffect } from 'react'
-  // import { v4 as uuidv4 } from 'uuid';
-  // uuidv4();
+  
   return (
     <>
       <div className="hero">
@@ -19,8 +16,9 @@ const Home = () => {
               <Link className="signup-btn" to={"/signup"}>Register</Link>
             </div>
             <div className="hero-img">
-              <img src="https://cdn.pixabay.com/photo/2024/02/07/15/09/ai-generated-8559288_1280.png" alt="" width={580} />
-              <img src={HeroBgImg} alt="" className="hero-img-bg" />
+              <img src={Hero} alt="" />
+              {/* <img src="https://cdn.pixabay.com/photo/2024/02/07/15/09/ai-generated-8559288_1280.png" alt="" width={580} /> */}
+              {/* <img src={HeroBgImg} alt="" className="hero-img-bg" /> */}
             </div>
           </div>
 

@@ -45,9 +45,10 @@ export default App
 
 
 
-// profile, admin, watch the course page, payment
+// admin, watch the course page, payment
 
-// fix the problem with the footer's styles
+// fix the problem in Nav (to fetch the pic, if only there is a token)
+// fix the problem with the footer's styles +
 // fix the proble with token getting old & etc
 // have to make a sceleton (home page, what the course, course/1)
 
@@ -66,10 +67,9 @@ export default App
 // admin / del course
 // admin / change the course
 
-// profile page
-// profile / all courses
-// profile / logout
-// prfile / 
+// profile / all courses +
+// profile / logout + 
+// profile / +
 
 
 // mobile

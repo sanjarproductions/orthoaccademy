@@ -1,9 +1,9 @@
-// import React from 'react'
 import { useEffect, useState } from "react"
-import "./Course.css"
 import { useParams } from "react-router-dom"
-import instance from "../../api/axios"
 import { Link } from "react-router-dom"
+import instance from "../../api/axios"
+import "./Course.css"
+
 const Courses = () => {
   const [courseData, setCourseData] = useState([])
   let location = useParams()
