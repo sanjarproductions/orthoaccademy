@@ -7,6 +7,7 @@ import Footer from './components/footer/Footer'
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
 
 import Home from './routes/home/Home'
+
 import UserProfile from './routes/userProfile/UserProfile'
 import UserCourses from './routes/userCourses/userCourses'
 import Course from './routes/course/Course'
