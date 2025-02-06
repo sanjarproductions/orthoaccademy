@@ -4,7 +4,7 @@ import './App.css'
 
 import Nav from './components/nav/Nav'
 import Footer from './components/footer/Footer'
-import ScrollToTop from './components/scrollToTop/scrollToTop'
+import ScrollToTop from './components/scrollToTop/ScrollToTop'
 
 import Home from './routes/home/Home'
 import UserProfile from './routes/userProfile/UserProfile'
