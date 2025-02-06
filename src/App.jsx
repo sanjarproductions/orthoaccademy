@@ -32,7 +32,6 @@ function App() {
 
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/profile/courses' element={<UserCourses />} />
-
       </Routes>
 
       <Footer />
@@ -47,7 +46,7 @@ export default App
 
 // admin, watch the course page, payment
 
-// fix the problem in Nav (to fetch the pic, if only there is a token)
+// fix the problem in Nav (to fetch the pic, if only there is a token) +
 // fix the problem with the footer's styles +
 // fix the proble with token getting old & etc
 // have to make a sceleton (home page, what the course, course/1)

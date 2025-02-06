@@ -29,7 +29,6 @@ const Nav = () => {
   useEffect(() => {
     if (!token || !userProfileData.full_name) return
     fetch(`https://ui-avatars.com/api/?name=${userProfileData.full_name}`)
-      .then(response => response.json)
       .then(data => setProfilePic(data.url))
   }, [userProfileData.full_name, token])
 
@@ -66,7 +65,13 @@ const Nav = () => {
           </div>
           :
           <div className='user-profile'>
-            <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? userProfileData.profile_pic : profilePic} alt="User Profile" />
+
+            {/* In case there is gonna be a Profile Pic */}
+            {/* <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? profilePic  : userProfileData.profile_pic} alt="Profile" /> */}
+
+            {/* For now when there is no profile pic */}
+            <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? <></> : profilePic} alt="Profile" />
+
             <ul className="profile-links">
               <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profile</Link></li>
               <li onClick={logout}> <FiLogOut className='logout-icon__link' /> Log out</li>
