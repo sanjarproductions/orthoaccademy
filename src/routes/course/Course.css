@@ -47,9 +47,9 @@
 
 .enroll-btn:hover {
     background: #006eff;
-    transform: scale(1.10);
+    transform: scale(1.05);
 }
 
 .enroll-btn:active {
-    transform: scale(0.9);
+    transform: scale(1);
 }

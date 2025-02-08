@@ -47,29 +47,21 @@ export default App
 
 // admin, watch the course page, payment
 
-// fix the problem in Nav (to fetch the pic, if only there is a token) +
-// fix the problem with the footer's styles +
+
 // fix the proble with token getting old & etc
+// do something with the redux & local storage problem (no getting saved) /Behzod is working
 // have to make a sceleton (home page, what the course, course/1)
 
-// home page +
-// sign up page +
-// login page +
-// log out +         (timer for updating the token, do smt with redux bcz it's getting wanished after an update)
 
-// about course page (courses/1) +
-// invoice (pay page) stripe
+// invoice (pay page)
 // watch the course (page) - process
+// about course page (courses/1) +
 
 
 // admin
 // admin / add course
 // admin / del course
 // admin / change the course
-
-// profile / all courses +
-// profile / logout + 
-// profile / +
 
 
 // mobile
@@ -80,7 +72,28 @@ export default App
 
 
 
+// //////////////
 
+
+
+
+
+
+
+
+// home page +
+// sign up page +
+// login page +
+// log out +         (timer for updating the token, do smt with redux bcz it's getting wanished after an update)
+// profile / all courses +
+// profile / logout + 
+// profile / +
+
+
+
+
+// fix the problem in Nav (to fetch the pic, if only there is a token) +
+// fix the problem with the footer's styles +
 
 
 //security

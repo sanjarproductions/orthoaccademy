@@ -3,7 +3,6 @@ import "./Dashboard.css"
 import instance from "../../api/axios"
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
-// import { format } from "date-fns";
 
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
@@ -13,7 +12,6 @@ const Dashboard = () => {
   let location = useParams()
   const [course, setCourse] = useState([])
   const [activeVideo, setActiveVideo] = useState(0)
-  // const formattedDate = format(new Date(isoDate), "dd MMMM yyyy, HH:mm:ss");
 
   useEffect(() => {
     instance(`/courses/${location.id}?token=${token}`)
@@ -49,7 +47,19 @@ const Dashboard = () => {
             </div>
 
             <div className="video-player__wrapper">
-              <video controls className="video-player" src={course?.video_url_list?.[activeVideo]}></video>
+
+
+              {/*  */}
+              <div className="video-wrapper">
+                <div className="video-controlls">
+                  <div className="timeline-container"></div>
+                  <div className="controlls"></div>
+                </div>
+                <video className="video-player" src={course?.video_url_list?.[activeVideo]}></video>
+              </div>
+              {/*  */}
+
+
 
               <div className="video-player__btn">
                 <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo - 1) }}><IoIosArrowBack /> Oldingi </button>

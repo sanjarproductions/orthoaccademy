@@ -68,12 +68,9 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    /* justify-content: space-between; */
 }
 
-/* BTN STYLES */
 
-/* CSS */
 .button-4 {
     appearance: none;
     background-color: #FAFBFC;
@@ -155,5 +152,4 @@
 
 .video-player__wrapper .lesson-desc .lesson-desc__text {
     font-size: 14px;
-
 }
