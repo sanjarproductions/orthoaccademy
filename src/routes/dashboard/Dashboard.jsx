@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./Dashboard.css"
 import instance from "../../api/axios"
 import { useParams } from "react-router-dom";
@@ -6,24 +6,90 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import { MdPause } from "react-icons/md";
+import { MdPlayArrow } from "react-icons/md";
+import { MdFullscreen } from "react-icons/md";
+import { MdFullscreenExit } from "react-icons/md";
+
+import { MdVolumeUp } from "react-icons/md";
+import { MdVolumeOff } from "react-icons/md";
 
 const Dashboard = () => {
   let token = localStorage.getItem("user-token")
   let location = useParams()
+  const wrapperRef = useRef(null)
+  const videoRef = useRef(null)
+
   const [course, setCourse] = useState([])
   const [activeVideo, setActiveVideo] = useState(0)
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     instance(`/courses/${location.id}?token=${token}`)
       .then(response => setCourse(response.data))
       .catch(err => console.log(err))
-  }, [location.id])
+  }, [location.id, token])
+  // combine the titles and videos together
+  const lessons = course.video_title?.map((title, index) => ({ title, video: course.video_url_list[index] }));
 
-  const lessons = course.video_title?.map((title, index) => ({
-    title,
-    video: course.video_url_list[index],
-  }));
-  console.log(course)
+
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const wrapper = wrapperRef.current;
+
+    if (!video || !wrapper) return;
+
+    const handlePlay = () => wrapper.classList.remove("paused");
+    const handlePause = () => wrapper.classList.add("paused");
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
+
+    return () => {
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
+    };
+  }, []);
+
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      if (wrapperRef.current.requestFullscreen) {
+        wrapperRef.current.requestFullscreen();
+        setIsFullScreen(true)
+      } else if (wrapperRef.current.mozRequestFullScreen) { // Firefox
+        wrapperRef.current.mozRequestFullScreen();
+      } else if (wrapperRef.current.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        wrapperRef.current.webkitRequestFullscreen();
+      } else if (wrapperRef.current.msRequestFullscreen) { // IE/Edge
+        wrapperRef.current.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        setIsFullScreen(false)
+        document.exitFullscreen();
+      }
+    }
+  };
+
+
+  const togglePlayPause = () => {
+    const video = videoRef.current;
+    console.log(video)
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
 
   return (
     <>
@@ -49,15 +115,22 @@ const Dashboard = () => {
             <div className="video-player__wrapper">
 
 
-              {/*  */}
-              <div className="video-wrapper">
+              <div className="video-wrapper paused " ref={wrapperRef}>
                 <div className="video-controlls">
                   <div className="timeline-container"></div>
-                  <div className="controlls"></div>
+                  <div className="controlls">
+                    <div className="first-pannel">
+                      <button className="play-icon" onClick={togglePlayPause}><MdPlayArrow /></button>
+                      <button className="pause-icon" onClick={togglePlayPause}><MdPause /></button>
+                      <button className="vol-icon" onClick={toggleMute}>{isMuted ? <MdVolumeOff /> : <MdVolumeUp />}</button>
+                    </div>
+                    <div className="second-pannel">
+                      <button className="fullscreen-icon" onClick={toggleFullScreen}>  {isFullScreen ? <MdFullscreenExit /> : <MdFullscreen />} </button>
+                    </div>
+                  </div>
                 </div>
-                <video className="video-player" src={course?.video_url_list?.[activeVideo]}></video>
+                <video className="video-player" src={course?.video_url_list?.[activeVideo]} ref={videoRef}></video>
               </div>
-              {/*  */}
 
 
 
@@ -88,4 +161,6 @@ export default Dashboard
 // design +
 // custom player 
 // next vid btn +
-// reload problem (solve)
+// the vide ourl being shown problem
+
+// the use state reload problem (solve)
