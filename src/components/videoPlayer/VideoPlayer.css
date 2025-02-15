@@ -1,0 +1,45 @@
+.controls {
+    gap: 10px;
+    align-items: center;
+}
+
+.controls input {
+    cursor: pointer;
+}
+
+.play-pause-btn {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    /* border: 1px solid blue; */
+    background: #0096FF;
+    outline: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 15px;
+}
+
+.fullscreen-icon {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.video-container {
+    padding-bottom: 50px;
+}
+
+.vol-icon {
+    font-size: 25px;
+}
+
+.seekVideo-icon {
+    flex: 1;
+}
+
+.vol-input{
+    max-width: 50px;
+    /* font-size: 12px; */
+}

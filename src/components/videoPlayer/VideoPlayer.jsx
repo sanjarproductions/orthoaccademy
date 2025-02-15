@@ -1,8 +1,12 @@
 import { useRef, useState } from "react";
 import "./VideoPlayer.css"
-import VideoFile from "../../assets/video.mp4"
 
-const VideoPlayer = () => {
+import { MdPlayArrow } from "react-icons/md";
+import { MdOutlinePause } from "react-icons/md";
+import { MdVolumeUp } from "react-icons/md";
+import { MdFullscreen } from "react-icons/md";
+
+const VideoPlayer = ({ pathToVideo }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -44,19 +48,26 @@ const VideoPlayer = () => {
   return (
     <div className="video-container" style={{ textAlign: "center" }}>
       <video
+        controlsList="nodownload"
         ref={videoRef}
-        src={VideoFile}
+        src={pathToVideo}
         onTimeUpdate={handleProgress}
-        style={{ width: "100%", maxWidth: "800px", borderRadius: "8px" }}
+        style={{ width: "100%", borderRadius: "8px" }}
       ></video>
-      <div className="controls" style={{ marginTop: "10px" }}>
-        <button onClick={togglePlay}>{isPlaying ? "Pause" : "Play"}</button>
-        <input type="range" min="0" max="100" value={progress} onChange={seekVideo} />
-        <input type="range" min="0" max="1" step="0.1" value={volume} onChange={handleVolumeChange} />
-        <button onClick={toggleFullscreen}>Fullscreen</button>
+      <div className="controls flex" style={{ marginTop: "10px" }}>
+        <button onClick={togglePlay} className="play-pause-btn">{isPlaying ? <MdOutlinePause /> : <MdPlayArrow />}</button>
+
+        <div className="flex"> <MdVolumeUp className="vol-icon"/>  <input className="vol-input" type="range" min="0" max="1" step="0.1" value={volume} onChange={handleVolumeChange} /> </div>
+
+        <input type="range" min="0" max="100" value={progress} onChange={seekVideo} className="seekVideo-icon"/>
+        <MdFullscreen onClick={toggleFullscreen} className="fullscreen-icon"/>
       </div>
     </div>
   )
 }
 
 export default VideoPlayer
+
+
+// when you click on the new video the seekVideo input starts in the middle of bar (and thats ok)
+// the play pause btn dosent resets to "paused" after the video has finished playing 

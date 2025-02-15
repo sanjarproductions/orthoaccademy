@@ -11,21 +11,10 @@ import { IoIosArrowBack } from "react-icons/io";
 const Dashboard = () => {
   let token = localStorage.getItem("user-token")
   let location = useParams()
-
   const videoRef = useRef(null)
   const progressBarRef = useRef(null)
-
-  // const wrapperRef = useRef(null)
-  // const totalTimeRef = useRef(null)
-  // const currentTimeRef = useRef(null)
-  // const progressLine = useRef(null)
-  // const progressRef = useRef(0)
-
   const [course, setCourse] = useState([])
   const [activeVideo, setActiveVideo] = useState(0)
-
-  // const [isFullScreen, setIsFullScreen] = useState(false);
-  // const [isMuted, setIsMuted] = useState(false);
 
   useEffect(() => {
     if (!location.id) return;
@@ -33,14 +22,12 @@ const Dashboard = () => {
     instance(`/courses/${location.id}?token=${token}`)
       .then(response => setCourse(response.data))
       .catch(err => console.log(err));
-  }, [location.id, token]); 
+  }, [location.id, token]);
 
-  // combine the titles and videos together
   const lessons = useMemo(() => (
     course.video_title?.map((title, index) => ({ id: uuidv4(), title, video: course.video_url_list?.[index] })) || []
   ), [course]);
 
-  // Ensure Reset (Timeline)
   const handleVideoChange = (id) => {
     setActiveVideo(id);
     if (videoRef.current) {
@@ -49,6 +36,7 @@ const Dashboard = () => {
     }
   };
 
+  console.log(lessons)
 
   return (
     <>
@@ -73,13 +61,12 @@ const Dashboard = () => {
 
             <div className="video-player__wrapper">
 
-
-              <VideoPlayer/>
+              <VideoPlayer pathToVideo={lessons?.[activeVideo]?.video}/>
 
 
 
               <div className="video-player__btn">
-                <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo >= 0 ? activeVideo - 1 : activeVideo) }}><IoIosArrowBack /> Oldingi </button>
+                <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo - 1) }}><IoIosArrowBack /> Oldingi </button>
                 <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo + 1) }}>Keyingi <IoIosArrowForward /></button>
               </div>
 
