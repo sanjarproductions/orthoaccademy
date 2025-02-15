@@ -2,16 +2,16 @@
 import "./Footer.css"
 import Logo from "/logo.png"
 import { Link } from "react-router-dom"
-
+import { useLocation } from "react-router-dom";
 
 import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
-  // let location = useLocation()
-  // let smt = ["/admin", "admin-login"]
+  const location = useLocation()
+  const ProtectedRoutes = ["/admin","/admin-login"]
 
-  return (
+  return location.pathname.includes(ProtectedRoutes) ? (
     <footer>
       <div className="footer-wrapper">
         <div className="container">
@@ -55,7 +55,7 @@ const Footer = () => {
       </div>
 
     </footer>
-  )
+  ) : <></>
 }
 
 export default Footer

@@ -3,6 +3,7 @@ import Logo from "/logo.png"
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import instance from '../../api/axios';
 import "./Nav.css"
 
@@ -12,6 +13,8 @@ import { FiLogOut } from "react-icons/fi";
 import { MdOutlineAccountCircle } from "react-icons/md";
 
 const Nav = () => {
+  const location = useLocation()
+  const ProtectedRoutes = ["/admin","/admin-login"]
   const token = localStorage.getItem("user-token")
   // const isLogged = useSelector(state => state.login.isLogged) // this limited solution
   const dispatch = useDispatch()
@@ -37,7 +40,7 @@ const Nav = () => {
     navigate("/")
   }
 
-  return (
+  return location.pathname.includes(ProtectedRoutes) ? (
     <nav>
       <div className='container nav-wrapper flex'>
 
@@ -79,7 +82,7 @@ const Nav = () => {
           </div>}
       </div>
     </nav >
-  )
+  ) : <></>
 }
 
 export default Nav
