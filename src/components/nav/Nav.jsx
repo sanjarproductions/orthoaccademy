@@ -14,7 +14,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 
 const Nav = () => {
   const location = useLocation()
-  const ProtectedRoutes = ["/admin","/admin-login"]
+  const ProtectedRoutes = ["/admin","/adminlogin"]
   const token = localStorage.getItem("user-token")
   // const isLogged = useSelector(state => state.login.isLogged) // this limited solution
   const dispatch = useDispatch()
@@ -39,8 +39,7 @@ const Nav = () => {
     dispatch({ type: "LOGOUT" })
     navigate("/")
   }
-
-  return location.pathname.includes(ProtectedRoutes) ? (
+  return !ProtectedRoutes.includes(location.pathname) ? (
     <nav>
       <div className='container nav-wrapper flex'>
 

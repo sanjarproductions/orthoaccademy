@@ -9,7 +9,7 @@ import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   const location = useLocation()
-  const ProtectedRoutes = ["/admin","/admin-login"]
+  const ProtectedRoutes = ["/admin","/adminlogin"]
 
   return location.pathname.includes(ProtectedRoutes) ? (
     <footer>
