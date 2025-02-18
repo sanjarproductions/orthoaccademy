@@ -37,13 +37,13 @@
     padding: 10px 15px;
     border-radius: 5px;
     outline: none;
-    border: none;
+    /* border: none; */
 }
 
 .redirect {
     text-align: center;
     font-size: 16px;
-margin-top: 20px;
+    margin-top: 20px;
 }
 
 .redirect a {
@@ -51,7 +51,7 @@ margin-top: 20px;
     color: #000;
 }
 
-.line{
+.line {
     height: 2px;
     width: 100%;
     background: #00000063;

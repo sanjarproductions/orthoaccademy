@@ -37,7 +37,7 @@
     padding: 10px 15px;
     border-radius: 5px;
     outline: none;
-    border: none;
+    /* border: none; */
 }
 
 .password-wrapper {

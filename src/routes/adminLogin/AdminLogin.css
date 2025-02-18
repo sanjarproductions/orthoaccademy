@@ -1,0 +1,15 @@
+.password-wrapper {
+    border: 1px solid #000;
+}
+
+.password-wrapper input {
+    border: none;
+}
+
+.simple__input {
+    border: 1px solid #000;
+}
+
+.submit-btn:active {
+    opacity: 0.7;
+}

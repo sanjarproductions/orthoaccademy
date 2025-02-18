@@ -15,6 +15,9 @@ import Dashboard from './routes/dashboard/Dashboard'
 import Admin from './routes/admin/Admin'
 import Private from './routes/private/Private'
 import AdminLogin from './routes/adminLogin/AdminLogin'
+import Update from './routes/admin/update/Update'
+import Create from './routes/admin/create/Create'
+import Delete from './routes/admin/delete/Delete'
 
 function App() {
   return (
@@ -24,7 +27,6 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home />} />
-        {/* <Route path='/admin' element={<Admin />} /> */}
         <Route path='/dashboard/:id' element={<Dashboard />} />
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
@@ -34,7 +36,11 @@ function App() {
         <Route path='adminlogin' element={<AdminLogin />}></Route>
 
         <Route path='/' element={<Private />}>
-          <Route path='/admin' element={<Admin />}></Route>
+          <Route path='/admin' element={<Admin />}>
+            <Route path='/admin/create' element={<Create />} />
+            <Route path='/admin/update' element={<Update />} />
+            <Route path='/admin/delete' element={<Delete />} />
+          </Route>
         </Route>
       </Routes>
 

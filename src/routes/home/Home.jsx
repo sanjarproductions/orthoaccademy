@@ -1,4 +1,4 @@
-import CourseCard from "../../components/course-card/CourseCard"
+import CourseCard from "../../components/courseCard/CourseCard"
 import Hero from "../../assets/hero.png"
 import { Link } from "react-router-dom"
 import "./Home.css"
