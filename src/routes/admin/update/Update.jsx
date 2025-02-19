@@ -33,7 +33,7 @@ const Update = () => {
     }, [adminToken])
     return (
         <div>
-
+            Update
         </div>
     )
 }

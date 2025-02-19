@@ -52,14 +52,14 @@ const videoPlayer = () => {
   //   };
   // }, [formatTime]);
 
-  // Play/Pause Class Toggle
+  // Play/Pause className Toggle
   // useEffect(() => {
   //   const video = videoRef.current;
   //   const wrapper = wrapperRef.current;
   //   if (!video || !wrapper) return;
 
-  //   const handlePlay = () => wrapper.classList.remove("paused");
-  //   const handlePause = () => wrapper.classList.add("paused");
+  //   const handlePlay = () => wrapper.classNameList.remove("paused");
+  //   const handlePause = () => wrapper.classNameList.add("paused");
 
   //   video.addEventListener("play", handlePlay);
   //   video.addEventListener("pause", handlePause);

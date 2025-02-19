@@ -4,6 +4,12 @@
     gap: 10px;
 }
 
-.users-grid .user{
+.users-grid .user {
     border: 1px solid #000;
+}
+
+.admin .container {
+    padding-top: 50px;
+    gap: 50px;
+    align-items: start;
 }

@@ -1,26 +1,25 @@
 import { Link, NavLink } from 'react-router-dom'
-import Logo from "/logo.png"
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import instance from '../../api/axios';
-import "./Nav.css"
-
 import { FaCartPlus } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import instance from '../../api/axios';
+import Logo from "/logo.png"
+import "./Nav.css"
 
 const Nav = () => {
   const location = useLocation()
-  const ProtectedRoutes = ["/admin","/adminlogin"]
+  const ProtectedRoutes = ["/admin", "/adminlogin"]
   const token = localStorage.getItem("user-token")
-  // const isLogged = useSelector(state => state.login.isLogged) // this limited solution
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [profilePic, setProfilePic] = useState("")
   const [userProfileData, setUserProfileData] = useState({})
+  // const isLogged = useSelector(state => state.login.isLogged) // this limited solution
 
   useEffect(() => {
     if (!token) return
@@ -39,7 +38,7 @@ const Nav = () => {
     dispatch({ type: "LOGOUT" })
     navigate("/")
   }
-  return !ProtectedRoutes.includes(location.pathname) ? (
+  return location.pathname.includes(ProtectedRoutes) ? (
     <nav>
       <div className='container nav-wrapper flex'>
 

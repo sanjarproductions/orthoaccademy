@@ -1,10 +1,6 @@
-// import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import './App.css'
 import Nav from './components/nav/Nav'
 import Footer from './components/footer/Footer'
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
-import { ToastContainer } from "react-toastify"
 import Home from './routes/home/Home'
 import UserProfile from './routes/userProfile/UserProfile'
 import UserCourses from './routes/userCourses/userCourses'
@@ -18,6 +14,9 @@ import AdminLogin from './routes/adminLogin/AdminLogin'
 import Update from './routes/admin/update/Update'
 import Create from './routes/admin/create/Create'
 import Delete from './routes/admin/delete/Delete'
+import { Routes, Route } from 'react-router-dom'
+import { ToastContainer } from "react-toastify"
+import './App.css'
 
 function App() {
   return (

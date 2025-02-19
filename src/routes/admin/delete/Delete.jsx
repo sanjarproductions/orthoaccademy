@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 const Delete = () => {
     // get the users
@@ -9,7 +9,7 @@ const Delete = () => {
     // }, [adminToken])
     return (
         <div>
-
+Delete
         </div>
     )
 }
