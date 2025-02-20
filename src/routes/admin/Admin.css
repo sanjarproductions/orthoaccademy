@@ -1,12 +1,4 @@
-.users-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.users-grid .user {
-    border: 1px solid #000;
-}
+/* Admin Manage */
 
 .admin .container {
     padding-top: 50px;
@@ -14,16 +6,143 @@
     align-items: start;
 }
 
-.admin-course-card {
-    border: 1px solid #000;
-}
-
 .admin-manage-wrapper {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px 15px;
+}
+
+
+.admin-course-card {
+    opacity: 0.9;
+    color: #000;
+    transition: 300ms;
+    max-width: 510px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f4f4f4a4;
+}
+
+.admin-course-card:hover {
+    transform: scale(1.010);
+    opacity: 1;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.admin-course-card:active {
+    transform: scale(1);
+}
+
+.admin-course-card img:first-child {
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-course-card img {
+    width: 100%;
+    height: 100%;
+    max-height: 220px;
+    object-fit: cover;
+
+    max-height: 220px;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.admin-course-card .card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 2;
+}
+
+.admin-course-card .card-text .flex {
+    justify-content: space-between;
+}
+
+.admin-course-card .card-text h3 {
+    font-size: 22px;
+}
+
+.admin-course-card .card-text strong {
+    font-size: 18px;
+}
+
+
+
+
+
+/* Admin Edit Course */
+
+.edit-course-wrapper {
+    margin: auto;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-.admin-manage-wrapper .admin-course-card {
-    max-width: 510px;
+.edit-course-wrapper .main {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    border-bottom: 1px solid #0000001d;
+    padding-bottom: 50px;
 }
+
+.course-img {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.course-img label {
+    font-weight: bold;
+}
+
+.course-img img {
+    border-radius: 10px;
+}
+
+
+.course-data-item label {
+    font-weight: bold;
+}
+
+.course-data-item .edit-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #00000028;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.delete-course {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.delete-course button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fa5e55;
+    background: transparent;
+    border: 2px solid #fa5e55;
+    font-weight: bold;
+    transition: 200ms;
+    font-size: 16px;
+}
+
+.course-delete-btn:hover {
+    background: #fa5e55;
+    color: #fff;
+    border-color: transparent;
+}
+
+/* Admin Users */
+
+/* Admin Create */
