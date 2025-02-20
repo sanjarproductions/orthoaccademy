@@ -9,9 +9,9 @@ import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   const location = useLocation()
-  const ProtectedRoutes = ["/admin","/adminlogin"]
+  const ProtectedRoutes = ["/admin", "/adminlogin", "/admin/create", "/admin/manage", "/admin/allusers"]
 
-  return location.pathname.includes(ProtectedRoutes) ? (
+  return !ProtectedRoutes.some(route => location.pathname.startsWith(route)) ? (
     <footer>
       <div className="footer-wrapper">
         <div className="container">

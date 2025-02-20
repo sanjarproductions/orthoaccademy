@@ -13,3 +13,17 @@
     gap: 50px;
     align-items: start;
 }
+
+.admin-course-card {
+    border: 1px solid #000;
+}
+
+.admin-manage-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.admin-manage-wrapper .admin-course-card {
+    max-width: 510px;
+}

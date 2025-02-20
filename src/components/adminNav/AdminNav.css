@@ -218,6 +218,7 @@ label[for=nav-toggle] {
     height: 54px;
     display: flex;
     align-items: center;
+    gap: 6px;
     color: var(--navbar-light-secondary);
     direction: ltr;
     cursor: pointer;

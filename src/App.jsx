@@ -11,9 +11,10 @@ import Dashboard from './routes/dashboard/Dashboard'
 import Admin from './routes/admin/Admin'
 import Private from './routes/private/Private'
 import AdminLogin from './routes/adminLogin/AdminLogin'
-import Update from './routes/admin/update/Update'
+import Users from './routes/admin/users/Users'
 import Create from './routes/admin/create/Create'
-import Delete from './routes/admin/delete/Delete'
+import Manage from './routes/admin/manage/Manage'
+import EditCourse from './routes/admin/manage/edit/EditCourse'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from "react-toastify"
 import './App.css'
@@ -36,9 +37,10 @@ function App() {
 
         <Route path='/' element={<Private />}>
           <Route path='/admin' element={<Admin />}>
+            <Route path='/admin/allusers' element={<Users />} />
             <Route path='/admin/create' element={<Create />} />
-            <Route path='/admin/update' element={<Update />} />
-            <Route path='/admin/delete' element={<Delete />} />
+            <Route path='/admin/manage' element={<Manage />} />
+            <Route path='/admin/manage/:id' element={<EditCourse />} />
           </Route>
         </Route>
       </Routes>

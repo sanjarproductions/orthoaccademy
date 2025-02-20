@@ -13,7 +13,7 @@ import "./Nav.css"
 
 const Nav = () => {
   const location = useLocation()
-  const ProtectedRoutes = ["/admin", "/adminlogin"]
+  const ProtectedRoutes = ["/admin", "/adminlogin", "/admin/create", "/admin/manage", "/admin/manage/", "/admin/allusers"]
   const token = localStorage.getItem("user-token")
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -38,7 +38,7 @@ const Nav = () => {
     dispatch({ type: "LOGOUT" })
     navigate("/")
   }
-  return location.pathname.includes(ProtectedRoutes) ? (
+  return !ProtectedRoutes.some(route => location.pathname.startsWith(route)) ? (
     <nav>
       <div className='container nav-wrapper flex'>
 

@@ -2,6 +2,9 @@ import "./AdminNav.css";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { GoHomeFill } from "react-icons/go";
+import { IoSettingsSharp } from "react-icons/io5";
+import { FaUsers } from "react-icons/fa";
+
 const AdminNav = () => {
     return (
         <div id="nav-bar">
@@ -11,10 +14,15 @@ const AdminNav = () => {
                 <hr />
             </div>
             <div id="nav-content">
-                <div className="nav-button"><GoHomeFill className="fas fa-palette"></GoHomeFill> <Link to={"/admin"}><span>Main</span></Link></div>
-                <div className="nav-button"><FaPlus className="fas fa-palette"></FaPlus> <Link to={"/admin/create"}><span>Create</span></Link></div>
-                <div className="nav-button"><FaPlus className="fas fa-palette"></FaPlus> <Link to={"/admin/update"}><span>Update</span></Link></div>
-                <div className="nav-button"><FaPlus className="fas fa-palette"></FaPlus> <Link to={"/admin/delete"}><span>Delete</span></Link></div>
+
+                <div className="nav-button"><GoHomeFill className="fas fa-palette"></GoHomeFill> <Link to={"/admin"}><span>Asosiy</span></Link></div>
+
+                <div className="nav-button"><IoSettingsSharp className="fas fa-palette"></IoSettingsSharp> <Link to={"/admin/manage"}><span>Boshqarish</span></Link></div>
+
+                <div className="nav-button"><FaPlus className="fas fa-palette"></FaPlus> <Link to={"/admin/create"}><span>Yaratish</span></Link></div>
+
+                <div className="nav-button"><FaUsers className="fas fa-palette"></FaUsers> <Link to={"/admin/allusers"}><span>Foydalanuvchilar</span></Link></div>
+
                 <div id="nav-content-highlight"></div>
             </div>
             <input id="nav-footer-toggle" type="checkbox" />
