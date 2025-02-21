@@ -1,37 +1,77 @@
-import instance from '../../../api/axios'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import instance from "../../../api/axios";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
 
 const Manage = () => {
-  const [courses, setCourses] = useState([])
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    instance(`courses/all`)
-      .then(response => setCourses(response))
-      .catch(err => console.log(err))
-  }, [courses])
+    instance.get("courses/all")
+      .then((response) => {
+        setCourses(response.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
-    <div className='admin-manage-wrapper'>
-      {
-        courses?.data?.map(i =>
-          <Link to={`/admin/manage/${i.id}`} key={i.id} >
-            <div className="admin-course-card">
-              <img src={i.image_url} alt="" className="card-img" />
-              <div className="card-text">
-                <h3>{i.title}</h3>
-                <p>{i.description.slice(0, 75) + "..."}</p>
-                <div className="flex">
-                  <strong>${i.price}</strong>
-                  <p>{i.video_count} video</p>
+    <>
+      {isLoading ? (
+        <div className="loading-wrapper">
+          <AiOutlineLoading className="loading-icon-big" />
+        </div>
+      ) : (
+        <div className="admin-manage-wrapper">
+          {courses.map((i) => (
+            <Link to={`/admin/manage/${i.id}`} key={i.id}>
+              <div className="admin-course-card">
+                <img src={i.image_url} alt="" className="card-img" />
+                <div className="card-text">
+                  <h3>{i.title}</h3>
+                  <p>{i.description.slice(0, 75) + "..."}</p>
+                  <div className="flex">
+                    <strong>${i.price}</strong>
+                    <p>{i.video_count} video</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        )
-      }
-    </div>
-  )
-}
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
+  );
+};
 
-export default Manage
+export default Manage;
+
+
+// <div className="admin-manage-wrapper">
+//   {isLoading ? (
+//     // <div className="loading-wrapper">
+//     //   <AiOutlineLoading className="loading-icon-big" />
+//     // </div>
+//     <></>
+//   ) : (
+//     courses.map((i) => (
+//       <Link to={`/admin/manage/${i.id}`} key={i.id}>
+//         <div className="admin-course-card">
+//           <img src={i.image_url} alt="" className="card-img" />
+//           <div className="card-text">
+//             <h3>{i.title}</h3>
+//             <p>{i.description.slice(0, 75) + "..."}</p>
+//             <div className="flex">
+//               <strong>${i.price}</strong>
+//               <p>{i.video_count} video</p>
+//             </div>
+//           </div>
+//         </div>
+//       </Link>
+//     ))
+//   )}
+// </div>

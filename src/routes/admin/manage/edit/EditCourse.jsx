@@ -8,25 +8,33 @@ import instance from "../../../../api/axios"
 // import { MdAccountCircle } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
+import { AiOutlineLoading } from "react-icons/ai";
 
 const EditCourse = () => {
     let navigate = useNavigate()
-    let params = useParams()
+    let { id } = useParams()
     const adminToken = localStorage.getItem("admin-token")
     const [courseData, setCourseData] = useState({})
     const [editMode, setEditMode] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+
+    const [courseTitle, setCourseTitle] = useState("")
+    console.log(courseTitle);
 
     useEffect(() => {
-        instance(`/courses/${params.id}`)
-            .then(response => setCourseData(response))
+        instance(`/courses/${id}`)
+            .then(response => {
+                setCourseData(response.data)
+                setIsLoading(false)
+            })
             .catch(err => console.log(err))
-    }, [params])
+    }, [id])
     console.log(courseData)
 
     let obj = {
         description: "Detailed course description here.",
         discount: 10,
-        id: 1,
+        id: courseData?.id,
         plan: [
             "Introduction",
             "Basics",
@@ -35,7 +43,7 @@ const EditCourse = () => {
         price: 100,
         short_description: "An example short description",
         stars: 5,
-        title: "Example Course Title",
+        title: courseTitle,
         video_count: 10,
         video_id: [
             1,
@@ -51,13 +59,13 @@ const EditCourse = () => {
 
     function UpdateCourse(courseId) {
         instance.put(`/admin/courses/${courseId}?token=${adminToken}`, obj)
-            .then(response => {
+            .then((response) => {
                 toast.success("Success")
-                console.log(response)
+                // console.log(response)
             })
-            .catch(err => {
+            .catch((err) => {
                 toast.error("Error")
-                console.log(err)
+                // console.log(err)
             })
     }
 
@@ -65,79 +73,92 @@ const EditCourse = () => {
         let confirmDelete = window.confirm("Kursni o'chirmoqchimisiz?")
         if (confirmDelete) {
             instance.delete(`/admin/courses/${courseId}?token=${adminToken}`)
-                .then(response => {
+                .then(() => {
                     toast.success("Kurs O'chirildi")
                     navigate("/admin/manage")
-                    // console.log(response)
                 })
-                .catch(err => {
+                .catch(() => {
                     toast.error("Hatolik Yuz berdi")
-                    // console.log(err)
                 })
         }
     }
 
+
     return (
-        <div className='edit-course-wrapper'>
-            <div className="main">
-                <div className='course-data-item'>
-                    <label>Kurs Nomi:</label>
-                    <div className='flex edit-wrapper'>
-                        <p>{courseData?.data?.title}</p>
-                        {
-                            editMode ? (
-                                <MdDone onClick={() => UpdateCourse(courseData?.data?.id)} />
-                            ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
-                        }
+        <>
+            {isLoading ? (
+                <div className="loading-wrapper">
+                    <AiOutlineLoading className="loading-icon-big" />
+                </div>
+            ) : (
+                <div className='edit-course-wrapper'>
+                    <button>Edit</button> <br />
+                    <div className="main">
+                        <div className='course-data-item'>
+                            <label>Kurs Nomi:</label>
+                            <div className='flex edit-wrapper'>
+                                {editMode ?
+                                    <input type="text" name="" id="" /> :
+                                    <p onChange={(e) => setCourseTitle(e.target.value)}>{courseData?.title}</p>
+                                }
+                                {
+                                    editMode ? (
+                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
+                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                }
+                            </div>
+                        </div>
+
+                        <div className='course-data-item'>
+                            <label>Kurs izohi:</label>
+                            <div className='flex edit-wrapper'>
+                                <p className='editable'>{courseData?.description}</p>
+                                {
+                                    editMode ? (
+                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
+                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                }
+                            </div>
+                        </div>
+
+                        <div className='course-data-item'>
+                            <label>Kurs izohi (qisqa):</label>
+                            <div className='flex edit-wrapper'>
+                                <p className='editable'>{courseData?.short_description}</p>
+                                {
+                                    editMode ? (
+                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
+                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                }
+                            </div>
+                        </div>
+
+                        <div className='course-data-item'>
+                            <label>Kurs narxi ($) :</label>
+                            <div className='flex edit-wrapper'>
+                                <p className='editable'>{courseData?.price}</p>
+                                {
+                                    editMode ? (
+                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
+                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                }
+                            </div>
+                        </div>
+
+                        <div className='course-img'>
+                            <label>Kurs Rasmi:</label>
+                            <img className='editable' width={100 + "%"} src={courseData?.image_url} />
+                        </div>
+                    </div>
+
+                    <div className="delete-course">
+                        <button className='course-delete-btn' onClick={() => DeleteCourse(courseData?.id)}> Kursni O&apos;chirish</button>
                     </div>
                 </div>
+            )
+            }
+        </>
 
-                <div className='course-data-item'>
-                    <label>Kurs izohi:</label>
-                    <div className='flex edit-wrapper'>
-                        <p className='editable'>{courseData?.data?.description}</p>
-                        {
-                            editMode ? (
-                                <MdDone onClick={() => UpdateCourse(courseData?.data?.id)} />
-                            ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
-                        }
-                    </div>
-                </div>
-
-                <div className='course-data-item'>
-                    <label>Kurs izohi (qisqa):</label>
-                    <div className='flex edit-wrapper'>
-                        <p className='editable'>{courseData?.data?.short_description}</p>
-                        {
-                            editMode ? (
-                                <MdDone onClick={() => UpdateCourse(courseData?.data?.id)} />
-                            ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
-                        }
-                    </div>
-                </div>
-
-                <div className='course-data-item'>
-                    <label>Kurs narxi ($) :</label>
-                    <div className='flex edit-wrapper'>
-                        <p className='editable'>{courseData?.data?.price}</p>
-                        {
-                            editMode ? (
-                                <MdDone onClick={() => UpdateCourse(courseData?.data?.id)} />
-                            ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
-                        }
-                    </div>
-                </div>
-
-                <div className='course-img'>
-                    <label>Kurs Rasmi:</label>
-                    <img className='editable' width={100 + "%"} src={courseData?.data?.image_url} />
-                </div>
-            </div>
-
-            <div className="delete-course">
-                <button className='course-delete-btn' onClick={() => DeleteCourse(courseData?.data?.id)}> Kursni O&apos;chirish</button>
-            </div>
-        </div>
     )
 }
 

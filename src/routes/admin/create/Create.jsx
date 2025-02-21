@@ -50,7 +50,7 @@ const Create = () => {
     }
 
     return (
-        <div>
+        <div className="admin-create-course">
             <form onSubmit={CreateCourse}>
                 <input type="text" placeholder="Kurs Nomi" />
                 <input type="text" placeholder="Kurs Izohi" />
