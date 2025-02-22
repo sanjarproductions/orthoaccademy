@@ -1,33 +1,30 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import instance from "../../../api/axios"
 import { toast } from "react-toastify"
 
 
 const Create = () => {
     const adminToken = localStorage.getItem("admin-token")
-    // const [description, setDescription] = useState("")
-    // const [discount, setDescription] = useState("")
-    // const [plan, setDescription] = useState("")
-    // const [price, setDescription] = useState("")
-    // const [shortDescription, setDescription] = useState("")
-    // const [title, setDescription] = useState("")
-    // const [videoCount, setDescription] = useState("")
-    // const [videoId, setDescription] = useState("")
-    // const [videoTitle, setDescription] = useState("")
+    const [newCourseTitle, setNewCourseTitle] = useState("")
+    const [newCourseDescription, setNewCourseDescription] = useState("")
+    const [newCourseShortDescription, setNewCourseShortDescription] = useState("")
+    const [newCoursePrice, setNewCoursePrice] = useState(0)
+
 
     function CreateCourse(e) {
         e.preventDefault()
-        instance.post(`/admin/courses?token=${adminToken}`, {
-            description: "Detailed course description here.",
+
+        let createCourse = {
+            description: newCourseDescription,
             discount: 0,
             plan: [
                 "Introduction",
                 "Basics",
                 "Advanced Topics"
             ],
-            price: 100,
-            short_description: "An example short description",
-            title: "Example Course Title",
+            price: newCoursePrice,
+            short_description: newCourseShortDescription,
+            title: newCourseTitle,
             video_count: 10,
             video_id: [
                 1,
@@ -39,50 +36,53 @@ const Create = () => {
                 "lesson 2",
                 "lesson 3"
             ]
-        })
-            .then(response => {
-                console.log(response)
+        }
+
+        instance.post(`/admin/courses?token=${adminToken}`, createCourse)
+            .then(() => {
                 toast.success("Kurs Yaratildi!")
+                setNewCourseTitle("")
+                setNewCourseDescription("")
+                setNewCourseShortDescription("")
+                setNewCoursePrice(0)
             })
             .catch(err => {
                 toast.error(err)
             })
     }
 
+    // console.log(
+    //     newCourseTitle,
+    //     newCourseDescription,
+    //     newCourseShortDescription,
+    //     newCoursePrice
+    // )
+
     return (
         <div className="admin-create-course">
-            <form onSubmit={CreateCourse}>
-                <input type="text" placeholder="Kurs Nomi" />
-                <input type="text" placeholder="Kurs Izohi" />
-                <input type="text" placeholder="Kurs Izohi (qisqa)" />
-                <input type="text" placeholder="Chegirma" />
-                <input type="price" placeholder="Narx" />
-                <input type="number" placeholder="Videolar soni" />
-                <button>Create</button>
+            <form className="admin-create" onSubmit={CreateCourse}>
+                <div className="input-wrapper">
+                    <label>Kurs Nomi:</label>
+                    <input required value={newCourseTitle} className="create-course-inp" type="text" onChange={(e) => setNewCourseTitle(e.target.value)} />
+                </div>
+                <div className="input-wrapper">
+                    <label>Kurs Izohi:</label>
+                    <textarea required value={newCourseDescription} className="create-course-inp" type="text" onChange={(e) => setNewCourseDescription(e.target.value)} />
+                </div>
+                <div className="input-wrapper">
+                    <label>Kurs Izohi (qisqa)</label>
+                    <input required value={newCourseShortDescription} className="create-course-inp" type="text" onChange={(e) => setNewCourseShortDescription(e.target.value)} />
+                </div>
+                <div className="input-wrapper">
+                    <label>Kurs Narxi:</label>
+                    <input required value={newCoursePrice} className="create-course-inp" type="number" onChange={(e) => setNewCoursePrice(e.target.value)} />
+                </div>
+                <div className="create-course">
+                    <button className="course-create-btn">Yaratish</button>
+                </div>
             </form>
         </div>
     )
 }
 
 export default Create
-
-
-
-
-
-
-// get all the users if needed
-
-// users?.data?.map((user, id) =>
-//   <div className="user" key={id}>
-//     <div className="flex">
-//       <p>Ism: {user.full_name ? user.full_name : "Yo'q"}</p>
-//       <p>Telefon: {user.phone ? user.phone : "Yo'q"}</p>
-//       <p>Daraja: {user.ranks ? user.ranks : "Yo'q"}</p>
-//       {/*  */}
-//       <p>Id: {user.id}</p>
-//       <p>username: {user.username}</p>
-//       <p>Email: {user.email}</p>
-//     </div>
-//   </div>
-// )

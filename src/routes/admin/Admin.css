@@ -1,3 +1,21 @@
+.loading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.loading-icon-big {
+    animation: rotate 300ms ease-in-out infinite;
+    font-size: 60px;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* Admin Manage */
 
 .admin .container {
@@ -11,12 +29,10 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px 15px;
     padding-bottom: 50px;
-    height: 100vh;
-    overflow-y: scroll;
     border: 1px solid #00000011;
-
     padding: 20px;
     border-radius: 15px;
+    margin-bottom: 50px;
 }
 
 
@@ -176,32 +192,106 @@
 
 .done-btn:hover {
     color: green;
-    /* transform: scale(1.09); */
 }
 
 
 /* Admin Create */
 
-.admin-create-course {}
-
-.loading-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+.admin-create-course {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.loading-icon-big {
-    animation: rotate 300ms ease-in-out infinite;
-    font-size: 60px;
+.admin-create-course form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px 50px;
 }
 
-@keyframes rotate {
-    to {
-        transform: rotate(360deg);
-    }
+.admin-create-course .input-wrapper label {
+    font-weight: bold;
 }
 
+.create-course-inp {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 7px;
+    border: none;
+    border: 1px solid #000;
+    outline: none;
+    transition: 200ms;
+}
 
+.create-course-inp:hover {
+    transform: scale(1.01);
+}
+
+.create-course {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.create-course button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #228B22;
+    background: transparent;
+    border: 2px solid #228B22;
+    font-weight: bold;
+    transition: 200ms;
+    font-size: 16px;
+}
+
+.course-create-btn:hover {
+    background: #228B22;
+    color: #fff;
+    border-color: transparent;
+}
 
 /* Admin Users */
+
+
+.admin-users-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.admin-users-wrapper .user-card .user-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.admin-users-wrapper .user-card {
+    border: 1px solid #ffffff9a;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #0c151f;
+    padding: 56px 16px 16px 16px;
+    border-radius: 15px;
+    color: #fff;
+    transition: 100ms;
+}
+
+.admin-users-wrapper .user-card .user-icon {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.admin-users-wrapper .user-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transform: scale(1.01);
+}
+
+.no-data-message {
+    opacity: 0.5;
+    font-style: italic;
+}
