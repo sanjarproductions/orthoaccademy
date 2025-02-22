@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import instance from "../../../../api/axios"
 
-// import { IoBookSharp } from "react-icons/io5";
-// import { MdAccountCircle } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
 import { AiOutlineLoading } from "react-icons/ai";
@@ -15,57 +13,81 @@ const EditCourse = () => {
     let { id } = useParams()
     const adminToken = localStorage.getItem("admin-token")
     const [courseData, setCourseData] = useState({})
-    const [editMode, setEditMode] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-
-    const [courseTitle, setCourseTitle] = useState("")
-    console.log(courseTitle);
+    const [editModeTitle, setEditModeTitle] = useState(false);
+    const [editModeDescription, setEditModeDescription] = useState(false);
+    const [editModeShortDescription, setEditModeShortDescription] = useState(false);
+    const [editModePrice, setEditModePrice] = useState(false);
+    const [courseTitle, setCourseTitle] = useState("");
+    const [courseDescription, setCourseDescription] = useState("");
+    const [courseShortDescription, setCourseShortDescription] = useState("");
+    const [coursePrice, setCoursePrice] = useState(0);
 
     useEffect(() => {
         instance(`/courses/${id}`)
             .then(response => {
-                setCourseData(response.data)
+                const data = response.data;
+                setCourseData(data);
+                setCourseTitle(data.title);
+                setCourseDescription(data.description);
+                setCourseShortDescription(data.short_description);
+                setCoursePrice(data.price);
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
     }, [id])
-    console.log(courseData)
 
-    let obj = {
-        description: "Detailed course description here.",
-        discount: 10,
-        id: courseData?.id,
-        plan: [
-            "Introduction",
-            "Basics",
-            "Advanced Topics"
-        ],
-        price: 100,
-        short_description: "An example short description",
-        stars: 5,
-        title: courseTitle,
-        video_count: 10,
-        video_id: [
-            1,
-            2,
-            3
-        ],
-        video_title: [
-            "lesson 1",
-            "lesson 2",
-            "lesson 3"
-        ]
-    }
 
     function UpdateCourse(courseId) {
-        instance.put(`/admin/courses/${courseId}?token=${adminToken}`, obj)
-            .then((response) => {
-                toast.success("Success")
-                // console.log(response)
+
+        let updatedCourse = {
+            description: courseDescription,
+            discount: 0,
+            id: courseData?.id,
+            plan: [
+                "Introduction",
+                "Basics",
+                "Advanced Topics"
+            ],
+            price: coursePrice,
+            short_description: courseShortDescription,
+            stars: 5,
+            title: courseTitle,
+            video_count: 3,
+            video_id: [
+                1,
+                2,
+                3
+            ],
+            video_title: [
+                "lesson 1",
+                "lesson 2",
+                "lesson 3"
+            ]
+        }
+
+        instance.put(`/admin/courses/${courseId}?token=${adminToken}`, updatedCourse)
+            .then(() => {
+                toast.success(`Kurs O'zgartirildi`)
+
+                instance(`/courses/${id}`)
+                    .then(response => {
+                        const data = response.data;
+                        setCourseData(data);
+                        setCourseTitle(data.title);
+                        setCourseDescription(data.description);
+                        setCourseShortDescription(data.short_description);
+                        setCoursePrice(data.price);
+                    })
+                    .catch(err => console.log(err))
+
+                setEditModeTitle(false)
+                setEditModeDescription(false)
+                setEditModeShortDescription(false)
+                setEditModePrice(false)
             })
-            .catch((err) => {
-                toast.error("Error")
-                // console.log(err)
+            .catch(() => {
+                toast.error("Hatolik Yuz berdi")
             })
     }
 
@@ -92,19 +114,18 @@ const EditCourse = () => {
                 </div>
             ) : (
                 <div className='edit-course-wrapper'>
-                    <button>Edit</button> <br />
                     <div className="main">
                         <div className='course-data-item'>
                             <label>Kurs Nomi:</label>
                             <div className='flex edit-wrapper'>
-                                {editMode ?
-                                    <input type="text" name="" id="" /> :
-                                    <p onChange={(e) => setCourseTitle(e.target.value)}>{courseData?.title}</p>
+                                {
+                                    editModeTitle ?
+                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseTitle || courseData?.title} onChange={(e) => setCourseTitle(e.target.value)} />) : (<p>{courseData?.title}</p>)
                                 }
                                 {
-                                    editMode ? (
-                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
-                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                    editModeTitle ?
+                                        (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
+                                        (<FaRegEdit className="btn" onClick={() => setEditModeTitle(true)} />)
                                 }
                             </div>
                         </div>
@@ -112,11 +133,14 @@ const EditCourse = () => {
                         <div className='course-data-item'>
                             <label>Kurs izohi:</label>
                             <div className='flex edit-wrapper'>
-                                <p className='editable'>{courseData?.description}</p>
                                 {
-                                    editMode ? (
-                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
-                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                    editModeDescription ?
+                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseDescription || courseData?.description} onChange={(e) => setCourseDescription(e.target.value)} />) : (<p>{courseData?.description}</p>)
+                                }
+                                {
+                                    editModeDescription ?
+                                        (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
+                                        (<FaRegEdit className="btn" onClick={() => setEditModeDescription(true)} />)
                                 }
                             </div>
                         </div>
@@ -124,11 +148,14 @@ const EditCourse = () => {
                         <div className='course-data-item'>
                             <label>Kurs izohi (qisqa):</label>
                             <div className='flex edit-wrapper'>
-                                <p className='editable'>{courseData?.short_description}</p>
                                 {
-                                    editMode ? (
-                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
-                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                    editModeShortDescription ?
+                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseShortDescription || courseData?.short_description} onChange={(e) => setCourseShortDescription(e.target.value)} />) : (<p>{courseData?.short_description}</p>)
+                                }
+                                {
+                                    editModeShortDescription ?
+                                        (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
+                                        (<FaRegEdit className="btn" onClick={() => setEditModeShortDescription(true)} />)
                                 }
                             </div>
                         </div>
@@ -136,11 +163,14 @@ const EditCourse = () => {
                         <div className='course-data-item'>
                             <label>Kurs narxi ($) :</label>
                             <div className='flex edit-wrapper'>
-                                <p className='editable'>{courseData?.price}</p>
                                 {
-                                    editMode ? (
-                                        <MdDone onClick={() => UpdateCourse(courseData?.id)} />
-                                    ) : (<FaRegEdit className="edit-btn" onClick={() => setEditMode(true)} />)
+                                    editModePrice ?
+                                        (<input className='courese-edit-input' type="number" required placeholder={"Enter"} value={coursePrice || courseData?.price} onChange={(e) => setCoursePrice(e.target.value)} />) : (<p>{courseData?.price}</p>)
+                                }
+                                {
+                                    editModePrice ?
+                                        (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
+                                        (<FaRegEdit className="btn" onClick={() => setEditModePrice(true)} />)
                                 }
                             </div>
                         </div>
@@ -163,4 +193,4 @@ const EditCourse = () => {
 }
 
 export default EditCourse
-// make the patch/put method actually work! inshallah
+//https://chatgpt.com/c/679f22ee-bc78-8002-a100-99de303cedea asked for things that i can make better in this code & didnt implemented them yet so fix that inshallah
