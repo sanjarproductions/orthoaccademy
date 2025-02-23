@@ -26,7 +26,7 @@ const Login = () => {
       password: password
     })
       .then(response => {
-        // console.log(response.data)
+        console.log(response.data)
         toast.success("Tizimga kirildi")
         setIsLoading(false)
         navigate("/")

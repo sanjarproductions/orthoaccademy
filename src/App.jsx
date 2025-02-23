@@ -55,26 +55,17 @@ export default App
 
 
 
-// admin, watch the course page, payment
-
+// watch the course page - process
+// have to make a sceleton (home page, what the course, course/1) + 
 
 // fix the proble with token getting old & etc
-// do something with the redux & local storage problem (no getting saved) /Behzod is working
-// have to make a sceleton (home page, what the course, course/1)
-
-
 // invoice (pay page)
-// watch the course (page) - process
-// about course page (courses/1) +
-
-
-// admin
-// admin / add course
-// admin / del course
-// admin / change the course
-
-
 // mobile
+
+// May be (because to be proffesional)
+// do something with the redux & local storage problem (no getting saved) / Behzod is working
+
+
 
 
 
@@ -99,8 +90,13 @@ export default App
 // profile / logout + 
 // profile / +
 
+// watch the course (page) +
+// about course page (courses/1) +
 
-
+// admin +
+// admin / add course +
+// admin / del course +
+// admin / change the course +
 
 // fix the problem in Nav (to fetch the pic, if only there is a token) +
 // fix the problem with the footer's styles +

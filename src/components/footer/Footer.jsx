@@ -1,6 +1,6 @@
 // import React from 'react'
 import "./Footer.css"
-import Logo from "/logo.png"
+import Logo from "/logo-white.png"
 import { Link } from "react-router-dom"
 import { useLocation } from "react-router-dom";
 

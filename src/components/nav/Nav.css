@@ -24,8 +24,9 @@ nav {
 }
 
 .nav-wrapper .logo img {
-    max-width: 220px;
-    max-height: 55px;
+    width: 100%;
+    max-width: 60px;
+    /* max-height: 55px; */
 }
 
 .links-wrapper {

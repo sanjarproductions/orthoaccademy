@@ -15,7 +15,7 @@ const Users = () => {
                 setIsLoading(false);
             })
     }, [adminToken])
-    console.log(users)
+    // console.log(users)
 
     return (
         <>
