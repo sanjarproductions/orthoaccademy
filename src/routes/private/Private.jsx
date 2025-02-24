@@ -5,9 +5,12 @@ import validateAdminToken from "../../helpers/validateAdminToken"
 const Private = () => {
   let adminToken = localStorage.getItem("admin-token");
 
-  return adminToken ? (
-   <Outlet/>
-  ) : <Navigate to={"/adminlogin"}/>
+  if (!adminToken || !validateAdminToken(adminToken)) {
+    localStorage.removeItem("admin-token"); // Clear expired token
+    return <Navigate to="/adminlogin" />;
+  }
+
+  return <Outlet />;
 }
 
 export default Private

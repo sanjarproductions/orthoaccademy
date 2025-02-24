@@ -2,6 +2,7 @@ import Nav from './components/nav/Nav'
 import Footer from './components/footer/Footer'
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
 import Home from './routes/home/Home'
+import UserPrivateRoute from './routes/userPrivateRoute/UserPrivateRoute'
 import UserProfile from './routes/userProfile/UserProfile'
 import UserCourses from './routes/userCourses/userCourses'
 import Course from './routes/course/Course'
@@ -27,15 +28,18 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/dashboard/:id' element={<Dashboard />} />
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/profile' element={<UserProfile />} />
-        <Route path='/profile/courses' element={<UserCourses />} />
         <Route path='adminlogin' element={<AdminLogin />}></Route>
 
-        <Route path='/' element={<Private />}>
+        <Route element={<UserPrivateRoute />}>
+          <Route path='/profile' element={<UserProfile />} />
+          <Route path='/dashboard/:id' element={<Dashboard />} />
+          <Route path='/profile/courses' element={<UserCourses />} />
+        </Route>
+
+        <Route element={<Private />}>
           <Route path='/admin' element={<Admin />}>
             <Route path='/admin/allusers' element={<Users />} />
             <Route path='/admin/create' element={<Create />} />
@@ -55,12 +59,12 @@ export default App
 
 
 
-// watch the course page - process
+// watch the course page --
 // have to make a sceleton (home page, what the course, course/1) + 
-
-// fix the proble with token getting old & etc
+// fix the proble with token getting old & etc +
 // invoice (pay page)
 // mobile
+// - **Reset-password saxifasi**:
 
 // May be (because to be proffesional)
 // do something with the redux & local storage problem (no getting saved) / Behzod is working
