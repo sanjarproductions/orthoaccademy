@@ -7,6 +7,8 @@ import UserProfile from './routes/userProfile/UserProfile'
 import UserCourses from './routes/userCourses/userCourses'
 import Course from './routes/course/Course'
 import Login from './routes/login/Login'
+import ResetPassword from './routes/resetPassword/ResetPassword'
+import ConfirmReset from './routes/resetPassword/confirmReset/ConfirmReset'
 import Signup from './routes/signup/Signup'
 import Dashboard from './routes/dashboard/Dashboard'
 import Admin from './routes/admin/Admin'
@@ -31,6 +33,9 @@ function App() {
         <Route path='/course/:id' element={<Course />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/confirm-reset' element={<ConfirmReset />} />
+
         <Route path='adminlogin' element={<AdminLogin />}></Route>
 
         <Route element={<UserPrivateRoute />}>
@@ -60,21 +65,23 @@ export default App
 
 
 // watch the course page --
-// have to make a sceleton (home page, what the course, course/1) + 
-// fix the proble with token getting old & etc +
+// Reset-password saxifasi
 // invoice (pay page)
 // mobile
-// - **Reset-password saxifasi**:
+
+// dashboard page
+//  - make the previous and next btns dynamic depending on if there is a next or oprevious video
+// userCourses
+//  - Kurs progress bari
+//  - Boshlash" yoki "Davom ettirish" tugmasi
+// Footer
+// - To'lov turlari logotiplari
+
 
 // May be (because to be proffesional)
 // do something with the redux & local storage problem (no getting saved) / Behzod is working
-
-
-
-
-
-
-
+// block making a screenshot & recording a video
+// - Darsning progress bari (darsning qancha qismi ko'rilganligini ko'rsatadi)
 
 
 // //////////////
@@ -84,7 +91,8 @@ export default App
 
 
 
-
+// have to make a sceleton (home page, what the course, course/1) + 
+// fix the proble with token getting old & etc +
 
 // home page +
 // sign up page +

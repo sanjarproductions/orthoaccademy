@@ -42,16 +42,16 @@ const Login = () => {
     <>
       <div className="container login-wrapper">
         <div className="form-wrapper">
-          <h1>Login</h1>
+          <h1>Kirish</h1>
           <form onSubmit={Login} className="login-form">
             <input className="simple__input" required type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             <div className="password-wrapper flex">
-              <input required type={passwordVisible ? "text" : "password"} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+              <input required type={passwordVisible ? "text" : "password"} placeholder="Parol" onChange={(e) => setPassword(e.target.value)} />
               {passwordVisible ? <FaEye onClick={() => setPasswordVisible(false)} /> : <FaEyeSlash onClick={() => setPasswordVisible(true)} />}
             </div>
-            <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Log In"}</button>
+            <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Kirish"}</button>
           </form>
-          <p className="redirect">Dont have an account? <Link to={"/signup"}>Sign Up</Link></p>
+          <p className="redirect">Parolni unutdingizmi? <Link to={"/reset-password"}>Click</Link></p>
         </div>
       </div>
     </>
