@@ -62,10 +62,12 @@ function App() {
 
 export default App
 
+// the reactjs media installed success
+// edit profile data has a problem with edit (placeholder's value prop) +
 
 
 // watch the course page --
-// Reset-password saxifasi
+// Reset-password saxifasi +
 // invoice (pay page)
 // mobile
 

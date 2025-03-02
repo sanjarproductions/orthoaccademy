@@ -42,7 +42,7 @@ const UserProfile = () => {
             });
     }
     console.log(userProfileData)
-    
+
     const fields = [
         { label: "Name", key: "full_name" },
         { label: "Username", key: "username" },
@@ -71,11 +71,12 @@ const UserProfile = () => {
                                     <div className="user-data" key={key}>
                                         <label>{label}:</label>
                                         <div className="box">
-                                            {
-                                                editMode[key] ? (
-                                                    <input type="text" value={inputValue[key] || userProfileData[key] || ""} onChange={(e) => setInputValue({ ...inputValue, [key]: e.target.value })} />
-                                                ) : (<p>{userProfileData[key] || "No Data"}</p>)
-                                            }
+                                            {editMode[key] ? (
+                                                <input type="text" value={inputValue[key] ?? ""} onChange={(e) => setInputValue(prev => ({ ...prev, [key]: e.target.value }))} />
+                                            ) : (
+                                                <p>{userProfileData[key] || "No Data"}</p>
+                                            )}
+
                                             {
                                                 editMode[key] ? (
                                                     <MdDone onClick={() => updateProfile(key)} />

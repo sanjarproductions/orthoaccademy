@@ -27,15 +27,33 @@ const Login = () => {
     })
       .then(response => {
         console.log(response.data)
+        setEmail("")
+        setPassword("")
+
         toast.success("Tizimga kirildi")
         setIsLoading(false)
         navigate("/")
         dispatch({ type: "LOGIN", payload: response.data });
       })
       .catch(error => {
-        console.log(error)
-        toast.error(error.response.data.detail)
         setIsLoading(false)
+
+        if (error.response) {
+
+          // if user doesnt exist
+          if (error.response.status === 401) {
+            toast.error("Foydalanuvchi mavjud emas");
+          } else {
+            // Default error message
+            toast.error(error.response.data.detail || "Xatolik yuz berdi");
+          }
+        } else {
+          // Handle network errors or no response
+          toast.error(error.response.data.detail);
+        }
+        // console.log(error);
+        setEmail("")
+        setPassword("")
       })
   }
   return (
@@ -44,14 +62,14 @@ const Login = () => {
         <div className="form-wrapper">
           <h1>Kirish</h1>
           <form onSubmit={Login} className="login-form">
-            <input className="simple__input" required type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+            <input className="simple__input" required type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <div className="password-wrapper flex">
-              <input required type={passwordVisible ? "text" : "password"} placeholder="Parol" onChange={(e) => setPassword(e.target.value)} />
+              <input required type={passwordVisible ? "text" : "password"} placeholder="Parol" value={password} onChange={(e) => setPassword(e.target.value)} />
               {passwordVisible ? <FaEye onClick={() => setPasswordVisible(false)} /> : <FaEyeSlash onClick={() => setPasswordVisible(true)} />}
             </div>
             <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Kirish"}</button>
           </form>
-          <p className="redirect">Parolni unutdingizmi? <Link to={"/reset-password"}>Click</Link></p>
+          <p className="redirect">Parolni unutdingizmi? <Link to={"/reset-password"}>Qayta O&apos;rnatish</Link></p>
         </div>
       </div>
     </>

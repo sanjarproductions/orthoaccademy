@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Video } from 'reactjs-media';
 import "./VideoPlayer.css"
 
 import { MdPlayArrow } from "react-icons/md";
@@ -47,21 +48,24 @@ const VideoPlayer = ({ pathToVideo }) => {
 
   return (
     <div className="video-container" style={{ textAlign: "center" }}>
-      <video
+      <Video src={pathToVideo} poster='' />
+      {/* <video
         controlsList="nodownload"
         ref={videoRef}
         src={pathToVideo}
         onTimeUpdate={handleProgress}
         style={{ width: "100%", borderRadius: "8px" }}
-      ></video>
-      <div className="controls flex" style={{ marginTop: "10px" }}>
+      ></video> */}
+
+      {/* <div className="controls flex" style={{ marginTop: "10px" }}>
         <button onClick={togglePlay} className="play-pause-btn">{isPlaying ? <MdOutlinePause /> : <MdPlayArrow />}</button>
 
         <div className="flex"> <MdVolumeUp className="vol-icon"/>  <input className="vol-input" type="range" min="0" max="1" step="0.1" value={volume} onChange={handleVolumeChange} /> </div>
 
         <input type="range" min="0" max="100" value={progress} onChange={seekVideo} className="seekVideo-icon"/>
         <MdFullscreen onClick={toggleFullscreen} className="fullscreen-icon"/>
-      </div>
+      </div> */}
+
     </div>
   )
 }
