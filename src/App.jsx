@@ -20,7 +20,7 @@ import Manage from './routes/admin/manage/Manage'
 import EditCourse from './routes/admin/manage/edit/EditCourse'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from "react-toastify"
-import './App.css'
+import './Mobile.css'
 
 function App() {
   return (
@@ -62,24 +62,17 @@ function App() {
 
 export default App
 
-// the reactjs media installed success
-// edit profile data has a problem with edit (placeholder's value prop) +
 
-
-// watch the course page --
+// watch the course page +
 // Reset-password saxifasi +
-// invoice (pay page)
 // mobile
+// - make the previous and next btns dynamic depending on if there is a next or oprevious video +
+// - To'lov turlari logotiplari +
 
-// dashboard page
-//  - make the previous and next btns dynamic depending on if there is a next or oprevious video
+
 // userCourses
 //  - Kurs progress bari
 //  - Boshlash" yoki "Davom ettirish" tugmasi
-// Footer
-// - To'lov turlari logotiplari
-
-
 // May be (because to be proffesional)
 // do something with the redux & local storage problem (no getting saved) / Behzod is working
 // block making a screenshot & recording a video

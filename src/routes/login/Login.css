@@ -47,22 +47,39 @@
     padding-right: 15px;
 }
 
-.password-wrapper input{
+.password-wrapper input {
     width: 100%;
     flex: 1;
 }
 
-.password-wrapper svg{
+.password-wrapper svg {
     font-size: 19px;
 }
 
-.loading-icon{
+.loading-icon {
     animation: rotate 300ms ease-in-out infinite;
 
 }
 
-@keyframes rotate{
-    to{
+.reset-password-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.reset-password-link a {
+    text-decoration: underline;
+    color: #000;
+}
+
+.redirect a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+@keyframes rotate {
+    to {
         transform: rotate(360deg);
     }
 }

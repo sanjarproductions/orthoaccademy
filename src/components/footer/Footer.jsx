@@ -1,6 +1,7 @@
 // import React from 'react'
 import "./Footer.css"
 import Logo from "/logo-white.png"
+import PaymeLogo from "../../assets/payme.png"
 import { Link } from "react-router-dom"
 import { useLocation } from "react-router-dom";
 
@@ -45,10 +46,16 @@ const Footer = () => {
           </div>
           <div className="flex sub-footer__flex">
             <p className="desc">© Ortho Academy 2024. Barcha huquqlari himoyalangan.</p>
+
             <div className="icons">
-              <a href="https://t.me/ortho_academy"><FaTelegram /></a>
-              <a href="https://www.instagram.com/moonlight_ortho_lab?igsh=MTJhbXJreDV2MmVpcw=="><FaInstagram /></a>
-              <a href="https://www.instagram.com/doc.ulugbek.abdusattarov?igsh=M3JsMm5uNTQ5dG5s&utm_source=qr"><FaInstagram /></a>
+              <div className="payment-logos">
+                <img src={PaymeLogo} width={50} alt="" />
+              </div>
+              <div className="social-media">
+                <a href="https://t.me/ortho_academy"><FaTelegram /></a>
+                <a href="https://www.instagram.com/moonlight_ortho_lab?igsh=MTJhbXJreDV2MmVpcw=="><FaInstagram /></a>
+                <a href="https://www.instagram.com/doc.ulugbek.abdusattarov?igsh=M3JsMm5uNTQ5dG5s&utm_source=qr"><FaInstagram /></a>
+              </div>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { AiOutlineLoading } from "react-icons/ai";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { FaArrowRightLong } from "react-icons/fa6";
 import "./Login.css"
 
 const Login = () => {
@@ -69,8 +70,10 @@ const Login = () => {
             </div>
             <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Kirish"}</button>
           </form>
-          <p className="redirect">Parolni unutdingizmi? <Link to={"/reset-password"}>Qayta O&apos;rnatish</Link></p>
+          <p className="reset-password-link">Parolni unutdingizmi? <Link to={"/reset-password"}>Qayta O&apos;rnatish</Link></p>
+          <p className="redirect"><Link to={"/signup"}>Registratsiya <FaArrowRightLong /></Link></p>
         </div>
+
       </div>
     </>
   )

@@ -71,6 +71,11 @@ ul li a {
 
 .sub-footer__flex .icons {
     display: flex;
+    gap: 20px;
+}
+
+.sub-footer__flex .icons .social-media {
+    display: flex;
     gap: 10px;
 }
 

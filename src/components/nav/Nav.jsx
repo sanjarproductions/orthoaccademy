@@ -41,11 +41,12 @@ const Nav = () => {
   return !ProtectedRoutes.some(route => location.pathname.startsWith(route)) ? (
     <nav>
       <div className='container nav-wrapper flex'>
-
-        <div className="logo">
-          <img src={Logo} alt="" />
-          <p>OrthoAcademy</p>
-        </div>
+        <Link to={"/"}>
+          <div className="logo">
+            <img src={Logo} alt="" />
+            <p>OrthoAcademy</p>
+          </div>
+        </Link>
         <div className="links-wrapper">
           <NavLink className={({ isActive }) => isActive ? "active" : ""} to={"/"}>Asosiy</NavLink>
 

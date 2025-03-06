@@ -17,6 +17,8 @@ const Dashboard = () => {
   const [course, setCourse] = useState([])
   const [activeVideo, setActiveVideo] = useState(0)
   const [isLoading, setIsLoading] = useState(true);
+  const [readFull, setReadFull] = useState(false)
+
 
   useEffect(() => {
     if (!location.id) return;
@@ -36,12 +38,10 @@ const Dashboard = () => {
   const handleVideoChange = (id) => {
     setActiveVideo(id);
     if (videoRef.current) {
-      videoRef.current.currentTime = 0;  
-      progressBarRef.current.value = 0; 
+      videoRef.current.currentTime = 0;
+      progressBarRef.current.value = 0;
     }
   };
-
-  console.log(lessons)
 
   return (
     <>
@@ -77,14 +77,17 @@ const Dashboard = () => {
 
 
                   <div className="video-player__btn">
-                    <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo - 1) }}><IoIosArrowBack /> Oldingi </button>
-                    <button className="next-btn button-4" onClick={() => { setActiveVideo(activeVideo + 1) }}>Keyingi <IoIosArrowForward /></button>
+                    <button className="next-btn button-4" disabled={activeVideo == 0 ? true : false} onClick={() => { setActiveVideo(activeVideo - 1) }}><IoIosArrowBack /> Oldingi </button>
+                    <button className="next-btn button-4" disabled={activeVideo === course.video_url_list.length - 1} onClick={() => { setActiveVideo(activeVideo + 1) }}>Keyingi <IoIosArrowForward /></button>
                   </div>
 
                   <div className="lesson-desc">
                     <p>{course?.created_at?.slice(0, 10)}</p>
                     <div>
-                      <p className="lesson-desc__text">{course?.description?.slice(0, 150) + "..."}</p> <button>Batafsil</button>
+                      {
+                        readFull ? <p>{course?.description}</p> :
+                          <p>{course?.description?.slice(0, 150) + "..."}</p>
+                      }
                     </div>
                   </div>
 
