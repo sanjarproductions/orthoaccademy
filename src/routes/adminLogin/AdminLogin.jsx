@@ -32,16 +32,6 @@ const AdminLogin = () => {
                 console.log(err)
                 toast.error("Email yoki parol hato")
             })
-        // if (email.trim() === "sanjarkama26@gmail.com" && password.trim() === "12345678") {
-        //     toast.success("Hush Kelibsiz!")
-        //     localStorage.setItem("admin-token", "acess")
-        //     setIsLoading(false)
-        //     navigate("/admin")
-        // }
-        // else {
-        //     toast.error("Email yoki parol hato")
-        //     setIsLoading(false)
-        // }
     }
 
     return (

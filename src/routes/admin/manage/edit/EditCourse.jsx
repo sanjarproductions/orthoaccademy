@@ -12,84 +12,53 @@ const EditCourse = () => {
     let navigate = useNavigate()
     let { id } = useParams()
     const adminToken = localStorage.getItem("admin-token")
-    const [courseData, setCourseData] = useState({})
     const [isLoading, setIsLoading] = useState(true)
-    const [editModeTitle, setEditModeTitle] = useState(false);
-    const [editModeDescription, setEditModeDescription] = useState(false);
-    const [editModeShortDescription, setEditModeShortDescription] = useState(false);
-    const [editModePrice, setEditModePrice] = useState(false);
-    const [courseTitle, setCourseTitle] = useState("");
-    const [courseDescription, setCourseDescription] = useState("");
-    const [courseShortDescription, setCourseShortDescription] = useState("");
-    const [coursePrice, setCoursePrice] = useState(0);
+    const [isEditing, setIsEditing] = useState({ title: false, description: false, short_description: false, price: false })
+    const [courseData, setCourseData] = useState({ title: "", description: "", short_description: "", price: 0 })
 
     useEffect(() => {
         instance(`/courses/${id}`)
             .then(response => {
-                const data = response.data;
-                setCourseData(data);
-                setCourseTitle(data.title);
-                setCourseDescription(data.description);
-                setCourseShortDescription(data.short_description);
-                setCoursePrice(data.price);
-                setIsLoading(false)
+                setCourseData(response.data);
+                setIsLoading(false);
             })
-            .catch(err => console.log(err))
-    }, [id])
+            .catch(() => {
+                toast.error("Ma'lumot olishda xatolik yuz berdi!");
+            });
+    }, [id]);
+
+    const handleInputChange = (field, value) => {
+        setCourseData(prev => ({ ...prev, [field]: value }));
+    };
 
 
     function UpdateCourse(courseId) {
-
         let updatedCourse = {
-            description: courseDescription,
+            ...courseData, 
             discount: 0,
-            id: courseData?.id,
-            plan: [
-                "Introduction",
-                "Basics",
-                "Advanced Topics"
-            ],
-            price: coursePrice,
-            short_description: courseShortDescription,
             stars: 5,
-            title: courseTitle,
             video_count: 3,
-            video_id: [
-                1,
-                2,
-                3
-            ],
-            video_title: [
-                "lesson 1",
-                "lesson 2",
-                "lesson 3"
-            ]
-        }
+            video_id: [1, 2, 3],
+            video_title: ["lesson 1", "lesson 2", "lesson 3"],
+            plan: ["Introduction", "Basics", "Advanced Topics"],
+        };
 
         instance.put(`/admin/courses/${courseId}?token=${adminToken}`, updatedCourse)
             .then(() => {
-                toast.success(`Kurs O'zgartirildi`)
-
-                instance(`/courses/${id}`)
-                    .then(response => {
-                        const data = response.data;
-                        setCourseData(data);
-                        setCourseTitle(data.title);
-                        setCourseDescription(data.description);
-                        setCourseShortDescription(data.short_description);
-                        setCoursePrice(data.price);
-                    })
-                    .catch(err => console.log(err))
-
-                setEditModeTitle(false)
-                setEditModeDescription(false)
-                setEditModeShortDescription(false)
-                setEditModePrice(false)
+                toast.success(`Kurs O'zgartirildi`);
+                return instance(`/courses/${id}`);
+            })
+            .then(response => {
+                setCourseData(response.data);
             })
             .catch(() => {
-                toast.error("Hatolik Yuz berdi")
+                toast.error("Hatolik Yuz berdi");
             })
+            .finally(() => {
+                setIsEditing({ title: false, description: false, short_description: false, price: false });
+            });
     }
+
 
     function DeleteCourse(courseId) {
         let confirmDelete = window.confirm("Kursni o'chirmoqchimisiz?")
@@ -119,13 +88,13 @@ const EditCourse = () => {
                             <label>Kurs Nomi:</label>
                             <div className='flex edit-wrapper'>
                                 {
-                                    editModeTitle ?
-                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseTitle || courseData?.title} onChange={(e) => setCourseTitle(e.target.value)} />) : (<p>{courseData?.title}</p>)
+                                    isEditing.title ?
+                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} defaultValue={courseData?.title} onChange={(e) => handleInputChange("title", e.target.value)} />) : (<p>{courseData?.title}</p>)
                                 }
                                 {
-                                    editModeTitle ?
+                                    isEditing.title ?
                                         (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
-                                        (<FaRegEdit className="btn" onClick={() => setEditModeTitle(true)} />)
+                                        (<FaRegEdit className="btn" onClick={() => setIsEditing(prev => ({ ...prev, title: true }))} />)
                                 }
                             </div>
                         </div>
@@ -134,13 +103,13 @@ const EditCourse = () => {
                             <label>Kurs izohi:</label>
                             <div className='flex edit-wrapper'>
                                 {
-                                    editModeDescription ?
-                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseDescription || courseData?.description} onChange={(e) => setCourseDescription(e.target.value)} />) : (<p>{courseData?.description}</p>)
+                                    isEditing.description ?
+                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseData?.description} onChange={(e) => handleInputChange("description", e.target.value)} />) : (<p>{courseData?.description}</p>)
                                 }
                                 {
-                                    editModeDescription ?
+                                    isEditing.description ?
                                         (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
-                                        (<FaRegEdit className="btn" onClick={() => setEditModeDescription(true)} />)
+                                        (<FaRegEdit className="btn" onClick={() => setIsEditing(prev => ({ ...prev, description: true }))} />)
                                 }
                             </div>
                         </div>
@@ -149,13 +118,13 @@ const EditCourse = () => {
                             <label>Kurs izohi (qisqa):</label>
                             <div className='flex edit-wrapper'>
                                 {
-                                    editModeShortDescription ?
-                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseShortDescription || courseData?.short_description} onChange={(e) => setCourseShortDescription(e.target.value)} />) : (<p>{courseData?.short_description}</p>)
+                                    isEditing.short_description ?
+                                        (<input className='courese-edit-input' type="text" required placeholder={"Enter"} value={courseData?.short_description} onChange={(e) => handleInputChange("short_description", e.target.value)} />) : (<p>{courseData?.short_description}</p>)
                                 }
                                 {
-                                    editModeShortDescription ?
+                                    isEditing.short_description ?
                                         (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
-                                        (<FaRegEdit className="btn" onClick={() => setEditModeShortDescription(true)} />)
+                                        (<FaRegEdit className="btn" onClick={() => setIsEditing(prev => ({ ...prev, short_description: true }))} />)
                                 }
                             </div>
                         </div>
@@ -164,13 +133,13 @@ const EditCourse = () => {
                             <label>Kurs narxi ($) :</label>
                             <div className='flex edit-wrapper'>
                                 {
-                                    editModePrice ?
-                                        (<input className='courese-edit-input' type="number" required placeholder={"Enter"} value={coursePrice || courseData?.price} onChange={(e) => setCoursePrice(e.target.value)} />) : (<p>{courseData?.price}</p>)
+                                    isEditing.price ?
+                                        (<input className='courese-edit-input' type="number" required placeholder={"Enter"} value={courseData?.price} onChange={(e) => handleInputChange("short_description", e.target.value)} />) : (<p>{courseData?.price}</p>)
                                 }
                                 {
-                                    editModePrice ?
+                                    isEditing.price ?
                                         (<MdDone className='btn done-btn' onClick={() => UpdateCourse(courseData?.id)} />) :
-                                        (<FaRegEdit className="btn" onClick={() => setEditModePrice(true)} />)
+                                        (<FaRegEdit className="btn" onClick={() => setIsEditing(prev => ({ ...prev, price: true }))} />)
                                 }
                             </div>
                         </div>
@@ -193,4 +162,3 @@ const EditCourse = () => {
 }
 
 export default EditCourse
-//https://chatgpt.com/c/679f22ee-bc78-8002-a100-99de303cedea asked for things that i can make better in this code & didnt implemented them yet so fix that inshallah

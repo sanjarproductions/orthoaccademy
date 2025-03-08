@@ -16,6 +16,3 @@ const Admin = () => {
 
 export default Admin
 
-
-// the only work whihc has last, is uploading the courses videos
-// i cant work on it right now bcz of the backend not aloowing me to 

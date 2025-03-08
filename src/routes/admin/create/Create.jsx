@@ -51,12 +51,6 @@ const Create = () => {
             })
     }
 
-    // console.log(
-    //     newCourseTitle,
-    //     newCourseDescription,
-    //     newCourseShortDescription,
-    //     newCoursePrice
-    // )
 
     return (
         <div className="admin-create-course">

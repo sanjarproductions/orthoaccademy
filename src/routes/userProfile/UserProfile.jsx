@@ -67,7 +67,6 @@ const UserProfile = () => {
                         <div className="user-wrapper">
                             {
                                 fields.map(({ label, key, }) =>
-                                    // if you are gonna add a fragment here, then add a key to that fragment
                                     <div className="user-data" key={key}>
                                         <label>{label}:</label>
                                         <div className="box">

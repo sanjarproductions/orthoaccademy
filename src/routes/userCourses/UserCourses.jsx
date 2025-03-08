@@ -1,4 +1,3 @@
-// import React from 'react'
 import "./UserCourses.css"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
@@ -29,7 +28,7 @@ const UserCourses = () => {
 
                     <div className="user-courses__main">
                         
-                        {userCourse?.data?.length > 0 ? <h1>Siz harid Qilgan kurslar:</h1> : <h1>Siz harid Qilgan kurs:</h1>}
+                        {userCourse?.data?.length > 0 ? <h1>Siz harid qilgan kurslar:</h1> : <h1>Siz harid qilgan kurs:</h1>}
 
                         <div className="user-courses__grid">
                             {
@@ -38,7 +37,7 @@ const UserCourses = () => {
                                         <img src={course.image_url} alt="" />
                                         <h4>{course.title}</h4>
                                         <p>{course.short_description.slice(0, 50) + "..."}</p>
-                                        <Link to={`/dashboard/${course.id}`} className=""><FaPlay /> Play</Link>
+                                        <Link to={`/dashboard/${course.id}`} className=""><FaPlay /> Boshlash</Link>
                                     </div>
                                 )
                             }

@@ -17,7 +17,6 @@ const Dashboard = () => {
   const [course, setCourse] = useState([])
   const [activeVideo, setActiveVideo] = useState(0)
   const [isLoading, setIsLoading] = useState(true);
-  const [readFull, setReadFull] = useState(false)
 
 
   useEffect(() => {
@@ -84,10 +83,8 @@ const Dashboard = () => {
                   <div className="lesson-desc">
                     <p>{course?.created_at?.slice(0, 10)}</p>
                     <div>
-                      {
-                        readFull ? <p>{course?.description}</p> :
-                          <p>{course?.description?.slice(0, 150) + "..."}</p>
-                      }
+                      
+                      <p>{course?.description?.slice(0, 150) + "..."}</p>
                     </div>
                   </div>
 
@@ -102,13 +99,3 @@ const Dashboard = () => {
 
 export default Dashboard
 
-
-// design +
-// custom player +
-// custom player / timerline +
-// custom player / duration +
-
-// next vid btn +
-// the video url being shown problem
-
-// the use state reload problem (solve)

@@ -14,7 +14,6 @@
     border: none;
     cursor: pointer;
     font-size: 30px;
-    /* border: 1px solid blue; */
     background: #0096FF;
     outline: none;
     border-radius: 5px;
@@ -31,6 +30,7 @@
     padding-bottom: 50px;
 }
 
+
 .vol-icon {
     font-size: 25px;
 }
@@ -39,7 +39,16 @@
     flex: 1;
 }
 
-.vol-input{
+.vol-input {
     max-width: 50px;
-    /* font-size: 12px; */
+}
+
+.video-module_videoRoot__RXFIL {
+    background-color: transparent !important;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 10px;
+}
+
+.video-module_videoOverlay__cbySQ {
+    background-color: transparent !important;
 }

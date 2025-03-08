@@ -1,4 +1,3 @@
-// import React from 'react'
 import "./Footer.css"
 import Logo from "/logo-white.png"
 import PaymeLogo from "../../assets/payme.png"

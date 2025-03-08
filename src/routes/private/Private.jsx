@@ -6,7 +6,7 @@ const Private = () => {
   let adminToken = localStorage.getItem("admin-token");
 
   if (!adminToken || !validateAdminToken(adminToken)) {
-    localStorage.removeItem("admin-token"); // Clear expired token
+    localStorage.removeItem("admin-token");
     return <Navigate to="/adminlogin" />;
   }
 

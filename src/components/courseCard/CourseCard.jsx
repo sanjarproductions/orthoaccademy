@@ -1,4 +1,3 @@
-// import React from 'react'
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { AiOutlineLoading } from "react-icons/ai";
@@ -16,7 +15,6 @@ const CourseCard = () => {
         setIsLoading(false);
       })
   }, [])
-  // console.log(cards)
 
   return (
     <>

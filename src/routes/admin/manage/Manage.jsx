@@ -49,29 +49,3 @@ const Manage = () => {
 };
 
 export default Manage;
-
-
-// <div className="admin-manage-wrapper">
-//   {isLoading ? (
-//     // <div className="loading-wrapper">
-//     //   <AiOutlineLoading className="loading-icon-big" />
-//     // </div>
-//     <></>
-//   ) : (
-//     courses.map((i) => (
-//       <Link to={`/admin/manage/${i.id}`} key={i.id}>
-//         <div className="admin-course-card">
-//           <img src={i.image_url} alt="" className="card-img" />
-//           <div className="card-text">
-//             <h3>{i.title}</h3>
-//             <p>{i.description.slice(0, 75) + "..."}</p>
-//             <div className="flex">
-//               <strong>${i.price}</strong>
-//               <p>{i.video_count} video</p>
-//             </div>
-//           </div>
-//         </div>
-//       </Link>
-//     ))
-//   )}
-// </div>

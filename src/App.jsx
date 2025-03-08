@@ -62,10 +62,47 @@ function App() {
 
 export default App
 
+// mobile
+// a fucntion to log-out a user if he has more than 3 active sessions
+// payment
+
+// Dashboard
+// the video url being shown problem
+// the use state reload problem (solve)
+// the description not wrapping problem
+
+// Admin
+// the only work which has last, is uploading the courses videos & course thumbnail
+// i cant work on it right now bcz of the backend not aloowing me to 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // watch the course page +
 // Reset-password saxifasi +
-// mobile
 // - make the previous and next btns dynamic depending on if there is a next or oprevious video +
 // - To'lov turlari logotiplari +
 
@@ -74,7 +111,7 @@ export default App
 //  - Kurs progress bari
 //  - Boshlash" yoki "Davom ettirish" tugmasi
 // May be (because to be proffesional)
-// do something with the redux & local storage problem (no getting saved) / Behzod is working
+// do something with the redux & local storage problem (no getting saved)
 // block making a screenshot & recording a video
 // - Darsning progress bari (darsning qancha qismi ko'rilganligini ko'rsatadi)
 
@@ -110,7 +147,6 @@ export default App
 
 
 //security
-// - "Parolni unutdingizmi?" havolasi reset-password saxifasiga olib boradi.
 
 // - **Reset-password saxifasi**:
 

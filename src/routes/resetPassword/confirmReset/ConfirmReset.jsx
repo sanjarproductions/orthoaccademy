@@ -23,7 +23,6 @@ const ConfirmReset = () => {
                 setVerifyNewPassword("");
                 localStorage.removeItem("reset-password-token")
                 navigate('/login')
-                // console.log(response)
             })
             .catch(() => {
                 toast.error("Hatolik yuz berdi")

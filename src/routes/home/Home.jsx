@@ -17,8 +17,6 @@ const Home = () => {
             </div>
             <div className="hero-img">
               <img src={Hero} alt="" />
-              {/* <img src="https://cdn.pixabay.com/photo/2024/02/07/15/09/ai-generated-8559288_1280.png" alt="" width={580} /> */}
-              {/* <img src={HeroBgImg} alt="" className="hero-img-bg" /> */}
             </div>
           </div>
 

@@ -38,21 +38,15 @@ const Login = () => {
       })
       .catch(error => {
         setIsLoading(false)
-
         if (error.response) {
-
-          // if user doesnt exist
           if (error.response.status === 401) {
             toast.error("Foydalanuvchi mavjud emas");
           } else {
-            // Default error message
             toast.error(error.response.data.detail || "Xatolik yuz berdi");
           }
         } else {
-          // Handle network errors or no response
           toast.error(error.response.data.detail);
         }
-        // console.log(error);
         setEmail("")
         setPassword("")
       })
