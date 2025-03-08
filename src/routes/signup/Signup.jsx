@@ -51,24 +51,24 @@ const Signup = () => {
     <>
       <div className="container signup-wrapper">
         <div className="form-wrapper">
-          <h1>Sign Up</h1>
+          <h1>Roʻyxatdan oʻtish</h1>
           <form className="signup-form" onSubmit={SignUp}>
             <input className="simple__input" required onChange={(e) => setUserName(e.target.value)} type="text" placeholder="username" />
             <input className="simple__input" required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" />
             <div className="password-wrapper flex">
-              <input required type={passwordVisible ? "text" : "password"} minLength={8} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+              <input required type={passwordVisible ? "text" : "password"} minLength={8} placeholder="Parol" onChange={(e) => setPassword(e.target.value)} />
               {passwordVisible ? <FaEye onClick={() => setPasswordVisible(false)} /> : <FaEyeSlash onClick={() => setPasswordVisible(true)} />}
             </div>
 
             <div className="line"></div>
-            <input className="simple__input" onChange={(e) => setFullName(e.target.value)} type="text" placeholder="Full Name" />
+            <input className="simple__input" onChange={(e) => setFullName(e.target.value)} type="text" placeholder="Toʻliq ism" />
             <input className="simple__input" onChange={(e) => setPhone(e.target.value)} type="tel" placeholder="+998()" />
-            <input className="simple__input" onChange={(e) => setRegion(e.target.value)} type="text" placeholder="Country/Region" />
-            <input className="simple__input" onChange={(e) => setRank(e.target.value)} type="text" placeholder="Rank" />
+            <input className="simple__input" onChange={(e) => setRegion(e.target.value)} type="text" placeholder="Mamlakat/Hudud" />
+            <input className="simple__input" onChange={(e) => setRank(e.target.value)} type="text" placeholder="Daraja" />
 
-            <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Sign Up"}</button>
+            <button className="submit-btn">{isLoading ? <AiOutlineLoading className="loading-icon" /> : "Roʻyxatdan oʻtish"}</button>
           </form>
-          <p className="redirect">Have an account? <Link to={"/login"}>Login</Link></p>
+          <p className="redirect">Akkauntingiz bormi? <Link to={"/login"}>Kirish</Link></p>
         </div>
       </div>
     </>

@@ -62,14 +62,16 @@ function App() {
 
 export default App
 
-// mobile
+// mobile +
+// translate the entire website to uzbek +
+
 // a fucntion to log-out a user if he has more than 3 active sessions
 // payment
 
 // Dashboard
-// the video url being shown problem
-// the use state reload problem (solve)
-// the description not wrapping problem
+// the video url being shown problem - not worth trying
+// the use state reload problem (solve) +
+// the description not wrapping problem - not worth it
 
 // Admin
 // the only work which has last, is uploading the courses videos & course thumbnail

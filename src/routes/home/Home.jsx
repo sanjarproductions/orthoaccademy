@@ -13,7 +13,7 @@ const Home = () => {
             <div className="hero-text">
               <h1>Istalgan joyda, o&apos;zingizga qulay vaqtda o&apos;qish imkoniyati</h1>
               <p className="desc">O&apos;nlab studentlar safiga q&apos;oshiling</p>
-              <Link className="signup-btn" to={"/signup"}>Register</Link>
+              <Link className="signup-btn" to={"/signup"}>R&apos;oyhatdan o&apos;tish</Link>
             </div>
             <div className="hero-img">
               <img src={Hero} alt="" />

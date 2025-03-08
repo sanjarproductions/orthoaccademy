@@ -51,7 +51,7 @@ const Nav = () => {
           <NavLink className={({ isActive }) => isActive ? "active" : ""} to={"/"}>Asosiy</NavLink>
 
           <div className="services-link">
-            <p>Services <IoMdArrowDropdown /></p>
+            <p>Servislar <IoMdArrowDropdown /></p>
             <div className="sub-links">
               <a href="https://t.me/ortho_academy_bot">Ortho Academy Bot</a>
               <a href="https://t.me/custom_care_bot">Aisha Bot</a>
@@ -63,7 +63,7 @@ const Nav = () => {
         {!token ?
           <div className="action-btns">
             <Link className='action-btn' to={"/login"}> <FaCartPlus /> Kirish</Link>
-            <Link className='action-btn' to={"/signup"}>Register</Link>
+            <Link className='action-btn' to={"/signup"}>Roʻyxatdan oʻtish</Link>
           </div>
           :
           <div className='user-profile'>
@@ -75,8 +75,8 @@ const Nav = () => {
             <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? <></> : profilePic} alt="Profile" />
 
             <ul className="profile-links">
-              <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profile</Link></li>
-              <li onClick={logout}> <FiLogOut className='logout-icon__link' /> Log out</li>
+              <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profil</Link></li>
+              <li onClick={logout}> <FiLogOut className='logout-icon__link' /> Chiqish</li>
             </ul>
           </div>}
       </div>

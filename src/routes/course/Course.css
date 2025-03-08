@@ -53,3 +53,13 @@
 .enroll-btn:active {
     transform: scale(1);
 }
+
+.read-full-btn {
+    background: transparent;
+    text-decoration: underline;
+    border: none;
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}

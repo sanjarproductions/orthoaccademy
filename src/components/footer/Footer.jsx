@@ -28,15 +28,15 @@ const Footer = () => {
             </div>
             <div className="flex-links">
               <ul>
-                <li>Links:</li>
-                <li><Link to={"/"}>Home</Link></li>
+                <li>Havolalar:</li>
+                <li><Link to={"/"}>Asosiy</Link></li>
                 <li><Link to={"https://t.me/ortho_academy_bot"}>Ortho Academy Bot</Link></li>
                 <li><Link to={"https://t.me/custom_care_bot"}>Aisha Bot</Link></li>
-                <li><Link to={"/signup"}>Sign up</Link></li>
-                <li><Link to={"/login"}>Login</Link></li>
+                <li><Link to={"/signup"}>Roʻyxatdan oʻtish</Link></li>
+                <li><Link to={"/login"}>Kirish</Link></li>
               </ul>
               <ul>
-                <li>Contact:</li>
+                <li>Kontaktlar:</li>
                 <li><a href="tel:+998979175291">+998 97 917 52 91</a></li>
               </ul>
             </div>
