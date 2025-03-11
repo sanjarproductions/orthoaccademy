@@ -83,3 +83,13 @@
         transform: rotate(360deg);
     }
 }
+
+/* Quit All Sessions */
+
+.quit-sessions-wrapper input {
+    width: 85%;
+}
+
+.quit-sessions-wrapper button {
+    width: 85%;
+}

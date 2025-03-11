@@ -39,12 +39,14 @@ const Login = () => {
       .catch(error => {
         setIsLoading(false)
         if (error.response) {
-          if (error.response.status === 401) {
-            toast.error("Foydalanuvchi mavjud emas");
+          if (error.response.status === 403) {
+            toast.error(error.response.data.detail.message);
+            navigate("/quit-all-sessions")
           } else {
             toast.error(error.response.data.detail || "Xatolik yuz berdi");
           }
         } else {
+          console.log(error)
           toast.error(error.response.data.detail);
         }
         setEmail("")
@@ -67,7 +69,6 @@ const Login = () => {
           <p className="reset-password-link">Parolni unutdingizmi? <Link to={"/reset-password"}>Qayta O&apos;rnatish</Link></p>
           <p className="redirect"><Link to={"/signup"}>Registratsiya <FaArrowRightLong /></Link></p>
         </div>
-
       </div>
     </>
   )
