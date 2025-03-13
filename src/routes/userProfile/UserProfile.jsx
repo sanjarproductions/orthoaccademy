@@ -1,4 +1,4 @@
-import "./userProfile.css"
+import "./UserProfile.css"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react"
 import { toast } from 'react-toastify';
