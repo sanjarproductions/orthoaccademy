@@ -18,7 +18,7 @@ import Users from './routes/admin/users/Users'
 import Create from './routes/admin/create/Create'
 import Manage from './routes/admin/manage/Manage'
 import EditCourse from './routes/admin/manage/edit/EditCourse'
-import QuitAllSessions from './routes/quitAllSessions/quitAllSessions'
+import QuitAllSessions from './routes/quitAllSessions/QuitAllSessions'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from "react-toastify"
 import './Mobile.css'
