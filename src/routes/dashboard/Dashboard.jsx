@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import "./Dashboard.css";
-import VideoPlayer from "../../components/videoPlayer/videoPlayer";
+import VideoPlayer from "../../components/videoPlayer/VideoPlayer";
 import instance from "../../api/axios";
 import { AiOutlineLoading } from "react-icons/ai";
 import { useParams } from "react-router-dom";
