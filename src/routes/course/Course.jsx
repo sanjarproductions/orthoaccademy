@@ -77,7 +77,7 @@ const Courses = () => {
                   <strong className="course-view__price">$ {courseData.price}</strong>
                 </div>
                 {
-                  courseData.price == 0 ? <Link to={localStorage.getItem("user-token") ? `/dashboard/${courseData.id}` : "/signup"} className="enroll-btn">Boshlash</Link> : <Link onClick={createOrder} to={localStorage.getItem("user-token") ? paymentLink : "/signup"} className="enroll-btn">Harid qilish</Link>
+                  courseData.price == 0 ? <Link to={localStorage.getItem("user-token") ? paymentLink : "/signup"} className="enroll-btn">Boshlash</Link> : <Link onClick={createOrder} to={localStorage.getItem("user-token") ? paymentLink : "/signup"} className="enroll-btn">Harid qilish</Link>
                 }
 
               </div>

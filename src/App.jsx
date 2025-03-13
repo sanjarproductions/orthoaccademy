@@ -4,7 +4,7 @@ import ScrollToTop from './components/scrollToTop/ScrollToTop'
 import Home from './routes/home/Home'
 import UserPrivateRoute from './routes/userPrivateRoute/UserPrivateRoute'
 import UserProfile from './routes/userProfile/UserProfile'
-import UserCourses from './routes/userCourses/userCourses'
+import UserCourses from './routes/userCourses/UserCourses'
 import Course from './routes/course/Course'
 import Login from './routes/login/Login'
 import ResetPassword from './routes/resetPassword/ResetPassword'
@@ -62,6 +62,9 @@ function App() {
 }
 
 export default App
+
+// make so even the free courses we should make an order, so that they could later access this course from /profile/courses
+// bcz we dont need them to insert their credit card, bro
 
 // mobile +
 // translate the entire website to uzbek +
