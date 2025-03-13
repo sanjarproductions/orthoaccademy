@@ -82,7 +82,7 @@ const Dashboard = () => {
                   </button>
                   <button
                     className="next-btn button-4"
-                    disabled={activeVideoRef.current === course.video_url_list.length - 1}
+                    disabled={activeVideoRef.current === course.video_url_list?.length - 1}
                     onClick={() => handleVideoChange(activeVideoRef.current + 1)}
                   >
                     Keyingi <IoIosArrowForward />

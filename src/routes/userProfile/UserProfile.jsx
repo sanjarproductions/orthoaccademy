@@ -1,13 +1,12 @@
 import "./userProfile.css"
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react"
-import instance from "../../api/axios"
 import { toast } from 'react-toastify';
-
 import { IoBookSharp } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
+import instance from "../../api/axios"
 
 const UserProfile = () => {
     let token = localStorage.getItem("user-token")

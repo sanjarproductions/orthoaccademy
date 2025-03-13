@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react"
+import { AiOutlineLoading } from "react-icons/ai";
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import { AiOutlineLoading } from "react-icons/ai";
+import { jwtDecode } from "jwt-decode"
 import instance from "../../api/axios"
 import "./Course.css"
+import { toast } from 'react-toastify';
 
 const Courses = () => {
   const [courseData, setCourseData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [readFull, setReadFull] = useState(false)
   const [paymentLink, setPaymentLink] = useState("")
-  // const []
+  let userToken = localStorage.getItem("user-token")
   let location = useParams()
 
   useEffect(() => {
@@ -22,16 +24,36 @@ const Courses = () => {
       .catch(err => console.log(err))
   }, [location.id])
 
-  useEffect(() => {
-    if (!courseData.price) return;
-
-    instance(`payment/generate-payment-link?order_id=${location.id}&amount=${courseData.price}`)
+  function createOrder() {
+  let decoded = jwtDecode(userToken);
+    instance.post(`/courses/${courseData.id}/orders/create?token=${userToken}`, {
+      amount: courseData.price,
+      course_id: courseData.id,
+      user_id: decoded.sub
+    })
       .then(response => {
-        setPaymentLink(response.data.url)
-        setIsLoading(false)
+        console.log(response.data.data.id)
+        instance(`payment/generate-payment-link?order_id=${response.data.data.id}&amount=${response.data.data.amount}&token=${userToken}`)
+          .then(response => {
+            setPaymentLink(response.data.url)
+            setIsLoading(false)
+            window.location.href = response.data.url;
+          })
+          .catch(err => console.log(err))
       })
-      .catch(err => console.log(err))
-  }, [courseData.price])
+
+      .catch(error => {
+        console.log(error)
+        if (error.response) {
+          if (error.response.status === 409) {
+            toast.error(error.response.data.detail)
+          }
+          else {
+            toast.error("Xatolik yuz berdi")
+          }
+        }
+      })
+  }
 
   return (
     <>
@@ -55,7 +77,7 @@ const Courses = () => {
                   <strong className="course-view__price">$ {courseData.price}</strong>
                 </div>
                 {
-                  courseData.price == 0 ? <Link to={localStorage.getItem("user-token") ? `/dashboard/${courseData.id}` : "/signup"} className="enroll-btn">Boshlash</Link> : <Link to={paymentLink} className="enroll-btn">Harid qilish</Link>
+                  courseData.price == 0 ? <Link to={localStorage.getItem("user-token") ? `/dashboard/${courseData.id}` : "/signup"} className="enroll-btn">Boshlash</Link> : <Link onClick={createOrder} to={localStorage.getItem("user-token") ? paymentLink : "/signup"} className="enroll-btn">Harid qilish</Link>
                 }
 
               </div>
@@ -66,5 +88,3 @@ const Courses = () => {
 }
 
 export default Courses
-
-
