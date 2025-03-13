@@ -37,7 +37,7 @@ function App() {
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/confirm-reset' element={<ConfirmReset />} />
         <Route path='/quit-all-sessions' element={<QuitAllSessions />} />
-        <Route path='adminlogin' element={<AdminLogin />}></Route>
+        <Route path='/adminlogin' element={<AdminLogin />}></Route>
 
         <Route element={<UserPrivateRoute />}>
           <Route path='/profile' element={<UserProfile />} />
