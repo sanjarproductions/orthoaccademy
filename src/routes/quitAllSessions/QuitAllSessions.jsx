@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineLoading } from "react-icons/ai";
 import instance from '../../api/axios'
+import { toast } from 'react-toastify';
 
 const QuitAllSessions = () => {
     const [oneTimeCode, setOneTimeCode] = useState("")
     const [isLoading, setIsLoading] = useState(false)
-    // let userToken = localStorage.getItem("")
+    let quitAllSessionsToken = localStorage.getItem("quit-all-sessions-token")
     let navigate = useNavigate("")
 
     function sendOneTimeCode(e) {
@@ -15,16 +16,20 @@ const QuitAllSessions = () => {
         setIsLoading(true)
         instance.post("/auth/check-verification-code", {
             input_code: oneTimeCode,
-            token: "kfoiisghpoisanhdfbjvnapikjnbadsrfmgnvlkjhbfcsou"
+            token: quitAllSessionsToken
         })
             .then(res => {
                 console.log(res)
                 setIsLoading(false)
+                localStorage.setItem("user-token", res.data.data.token)
                 navigate("/profile")
+                toast.success(res.data.data.message);
+                localStorage.removeItem("quit-all-sessions-token")
             })
             .catch(err => {
                 setIsLoading(false)
                 console.log(err)
+                toast.error(err.response.data.detail);
             })
     }
     return (

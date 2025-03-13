@@ -39,8 +39,10 @@ const Login = () => {
       .catch(error => {
         setIsLoading(false)
         if (error.response) {
-          if (error.response.status === 403) {
+          if (error.response.status === 412) {
+            console.log(error)
             toast.error(error.response.data.detail.message);
+            localStorage.setItem("quit-all-sessions-token", error.response.data.detail.token)
             navigate("/quit-all-sessions")
           } else {
             toast.error(error.response.data.detail || "Xatolik yuz berdi");

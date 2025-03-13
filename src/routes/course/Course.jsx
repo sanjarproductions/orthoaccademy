@@ -9,6 +9,8 @@ const Courses = () => {
   const [courseData, setCourseData] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const [readFull, setReadFull] = useState(false)
+  const [paymentLink, setPaymentLink] = useState("")
+  // const []
   let location = useParams()
 
   useEffect(() => {
@@ -19,6 +21,17 @@ const Courses = () => {
       })
       .catch(err => console.log(err))
   }, [location.id])
+
+  useEffect(() => {
+    if (!courseData.price) return;
+
+    instance(`payment/generate-payment-link?order_id=${location.id}&amount=${courseData.price}`)
+      .then(response => {
+        setPaymentLink(response.data.url)
+        setIsLoading(false)
+      })
+      .catch(err => console.log(err))
+  }, [courseData.price])
 
   return (
     <>
@@ -42,7 +55,7 @@ const Courses = () => {
                   <strong className="course-view__price">$ {courseData.price}</strong>
                 </div>
                 {
-                  courseData.price == 0 ? <Link to={localStorage.getItem("user-token") ? `/dashboard/${courseData.id}` : "/signup"} className="enroll-btn">Boshlash</Link> : <Link to={"/payme.com"} className="enroll-btn">Harid qilish</Link>
+                  courseData.price == 0 ? <Link to={localStorage.getItem("user-token") ? `/dashboard/${courseData.id}` : "/signup"} className="enroll-btn">Boshlash</Link> : <Link to={paymentLink} className="enroll-btn">Harid qilish</Link>
                 }
 
               </div>
