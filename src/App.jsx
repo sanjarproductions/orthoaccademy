@@ -42,7 +42,7 @@ function App() {
         <Route element={<UserPrivateRoute />}>
           <Route path='/profile' element={<UserProfile />} />
           <Route path='/dashboard/:id' element={<Dashboard />} />
-          <Route path='/profile/courses' element={<UserCourses />} />
+          <Route path='/user-courses' element={<UserCourses />} />
         </Route>
 
         <Route element={<Private />}>
@@ -63,27 +63,39 @@ function App() {
 
 export default App
 
+// video track problem +
+// video main screen paly pause click function +
+// change the location for user courses link (have bought) +
+// "/course/:id" page - make btn dimanic (if a user has bought the course show different btn "K'orish")
+
+
+
+
+
+
+
+
+
+
+
+
 // make so even the free courses we should make an order, so that they could later access this course from /profile/courses
 // bcz we dont need them to insert their credit card, bro
-
-// mobile +
-// translate the entire website to uzbek +
-
-// a fucntion to log-out a user if he has more than 3 active sessions
-// payment
-
-// Dashboard
-// the video url being shown problem - not worth trying
-// the use state reload problem (solve) +
-// the description not wrapping problem - not worth it
 
 // Admin
 // the only work which has last, is uploading the courses videos & course thumbnail
 // i cant work on it right now bcz of the backend not aloowing me to 
 
 
-
-
+// _________
+// Dashboard
+// the video url being shown problem - not worth trying
+// the use state reload problem (solve) +
+// the description not wrapping problem - not worth it
+// mobile +
+// translate the entire website to uzbek +
+// a fucntion to log-out a user if he has more than 3 active sessions +
+// payment +
 
 
 

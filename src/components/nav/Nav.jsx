@@ -10,6 +10,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import instance from '../../api/axios';
 import Logo from "/logo.png"
 import "./Nav.css"
+import { IoBookOutline } from "react-icons/io5";
 
 const Nav = () => {
   const location = useLocation()
@@ -76,6 +77,7 @@ const Nav = () => {
 
             <ul className="profile-links">
               <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profil</Link></li>
+              <li><Link to={"/user-courses"}><IoBookOutline />   Kurslarim</Link></li>
               <li onClick={logout}> <FiLogOut className='logout-icon__link' /> Chiqish</li>
             </ul>
           </div>}

@@ -2,9 +2,6 @@ import "./UserCourses.css"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import instance from "../../api/axios"
-
-import { IoBookSharp } from "react-icons/io5";
-import { MdAccountCircle } from "react-icons/md";
 import { FaPlay } from "react-icons/fa";
 
 const UserCourses = () => {
@@ -21,10 +18,10 @@ const UserCourses = () => {
             <div className="container user-courses">
                 <div className="flex">
 
-                    <div className="profile-sidebar">
+                    {/* <div className="profile-sidebar">
                         <Link to={"/profile"}><MdAccountCircle /> Akkaunt</Link>
                         <Link to={"/profile/courses"}><IoBookSharp /> Kurslar</Link>
-                    </div>
+                    </div> */}
 
                     <div className="user-courses__main">
                         

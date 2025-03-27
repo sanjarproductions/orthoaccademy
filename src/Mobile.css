@@ -141,7 +141,9 @@
         padding-left: 10px;
         padding-right: 10px;
     }
-
+    .course-lessons__list{
+        width: auto;
+    }
     .dasboard-desc-btn {
         font-size: 15px !important;
     }

@@ -1,9 +1,7 @@
 import "./UserProfile.css"
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useEffect, useState } from "react"
 import { toast } from 'react-toastify';
-import { IoBookSharp } from "react-icons/io5";
-import { MdAccountCircle } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDone } from "react-icons/md";
 import instance from "../../api/axios"
@@ -57,10 +55,10 @@ const UserProfile = () => {
             <div className="container">
                 <div className="user-data__wrapper">
 
-                    <div className="profile-sidebar">
+                    {/* <div className="profile-sidebar">
                         <Link to={"/profile"}><MdAccountCircle /> Akkaunt</Link>
                         <Link to={"/profile/courses"}><IoBookSharp /> Kurslar</Link>
-                    </div>
+                    </div> */}
 
                     <div className="main-content">
                         <div className="user-wrapper">
