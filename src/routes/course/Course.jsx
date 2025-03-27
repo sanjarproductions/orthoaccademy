@@ -96,7 +96,7 @@ const Courses = () => {
                 </strong>
               </div>
 
-              {userToken ? (ifUserHasCourse ? <Link className="enroll-btn" to={`/dashboard/${courseData.id}`}>Boshlash</Link> : <Link className="enroll-btn" to={paymentLink} onClick={createOrder} style={paymentLoading ? { opacity: 0.5 } : { opacity: 1 }}>Harid qilish</Link>) : <Link to={"/signup"}>Boshlash</Link>}
+              {userToken ? (ifUserHasCourse ? <Link className="enroll-btn" to={`/dashboard/${courseData.id}`}>Boshlash</Link> : <Link className="enroll-btn" to={paymentLink} onClick={createOrder} style={paymentLoading ? { opacity: 0.5 } : { opacity: 1 }}>Harid qilish</Link>) : <Link className="enroll-btn" to={"/signup"}>Boshlash</Link>}
           </div>
         </div>
         </div >
