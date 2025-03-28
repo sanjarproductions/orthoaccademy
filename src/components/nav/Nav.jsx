@@ -68,13 +68,11 @@ const Nav = () => {
           </div>
           :
           <div className='user-profile'>
-
-            {/* In case there is gonna be a Profile Pic */}
-            {/* <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? profilePic  : userProfileData.profile_pic} alt="Profile" /> */}
-
-            {/* For now when there is no profile pic */}
-            <img className="user-profile__icon" src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? <></> : profilePic} alt="Profile" />
-
+            <img 
+              className="user-profile__icon" 
+              src={userProfileData?.profile_pic && userProfileData.profile_pic !== "default_profile_pic.jpg" ? userProfileData.profile_pic : profilePic} 
+              alt="Profile" 
+            />
             <ul className="profile-links">
               <li><Link to={"/profile"}><MdOutlineAccountCircle /> Profil</Link></li>
               <li><Link to={"/user-courses"}><IoBookOutline />   Kurslarim</Link></li>
