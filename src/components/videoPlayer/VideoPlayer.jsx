@@ -21,26 +21,27 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [isBuffering, setIsBuffering] = useState(false);
   const [error, setError] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-  // const [wasPlaying, setWasPlaying] = useState(false);
 
   const videoRef = useRef(null);
   const containerRef = useRef(null);
   const progressRef = useRef(null);
   const controlsTimeoutRef = useRef();
 
+  // Reset states when video source changes
   useEffect(() => {
-    setIsPlaying(false);
-  }, [videoId, courseId]);
-
-  useEffect(() => {
-    const fetchVideo = async () => {
+    const loadVideo = async () => {
       try {
-        onLoadStart?.();
         setIsPlaying(false);
+        setIsLoading(true);
+        setError(null);
+        onLoadStart?.();
+
+        console.log('Starting video fetch...');
         const response = await fetch(
-          `https://backend-ortho-site-api-66d73427bd8c.herokuapp.com/api/v1.0/vidoes/range/${courseId}/${videoId}?token=${token}`,
+          `https://backend-ortho-site-api-66d73427bd8c.herokuapp.com/api/v1.0/vidoes/stream?token=${token}&course_id=${courseId}&video_id=${videoId}`,
           {
             headers: { Range: "bytes=0-" },
           }
@@ -50,9 +51,13 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
           throw new Error(`Error loading video: ${response.status}`);
         }
 
+        console.log('Response received, starting blob conversion...');
         const blob = await response.blob();
+        console.log('Blob created, creating object URL...');
         const url = URL.createObjectURL(blob);
         setVideoUrl(url);
+        console.log('Video URL set:', url);
+
       } catch (error) {
         console.error("Error fetching the video:", error);
         setError('Error loading video');
@@ -61,7 +66,14 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
       }
     };
 
-    fetchVideo();
+    loadVideo();
+
+    // Cleanup function
+    return () => {
+      if (videoUrl) {
+        URL.revokeObjectURL(videoUrl);
+      }
+    };
   }, [courseId, videoId]);
 
   useEffect(() => {
@@ -74,7 +86,17 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
     };
 
     const handleLoadedData = () => {
+      setIsLoading(false);
       onLoadedData?.();
+    };
+
+    const handleWaiting = () => {
+      setIsBuffering(true);
+    };
+
+    const handlePlaying = () => {
+      setIsBuffering(false);
+      setIsLoading(false);
     };
 
     const handleTimeUpdate = () => {
@@ -83,28 +105,27 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
       }
     };
 
-    const handleError = () => {
+    const handleError = (e) => {
+      console.error('Video error:', e, video.error);
       setError('Error loading video');
       setIsLoading(false);
       onError?.();
     };
 
-    const handleEnded = () => {
-      setIsPlaying(false);
-    };
-
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('waiting', handleWaiting);
+    video.addEventListener('playing', handlePlaying);
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('error', handleError);
-    video.addEventListener('ended', handleEnded);
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('waiting', handleWaiting);
+      video.removeEventListener('playing', handlePlaying);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('error', handleError);
-      video.removeEventListener('ended', handleEnded);
     };
   }, [isDragging, onLoadedData, onError]);
 
@@ -151,22 +172,19 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    if (isPlaying) {
-      video.play().catch(() => setIsPlaying(false));
-    } else {
-      video.pause();
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
     video.volume = isMuted ? 0 : volume;
   }, [volume, isMuted]);
 
   const togglePlay = () => {
+    if (!videoRef.current) return;
+    
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play().catch(error => {
+        console.error('Play error:', error);
+      });
+    }
     setIsPlaying(!isPlaying);
   };
 
@@ -269,7 +287,7 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
       onMouseMove={handleMouseMove}
       onDoubleClick={handleDoubleClick}
     >
-      {isLoading && !videoUrl && !error && (
+      {isLoading && !error && (
         <div className="video-skeleton">
           <div className="skeleton-title"></div>
           <div className="skeleton-thumbnail"></div>
@@ -283,12 +301,28 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
       )}
 
       {videoUrl && (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          className="video-player"
-          onClick={togglePlay}
-        />
+        <>
+          <video
+            ref={videoRef}
+            key={videoUrl}
+            src={videoUrl}
+            className="video-player"
+            onClick={togglePlay}
+            playsInline
+            preload="auto"
+          />
+          {isBuffering && isPlaying && (
+            <div className="buffering-indicator">
+              <div className="spinner"></div>
+              <span>Loading...</span>
+            </div>
+          )}
+          {!isPlaying && showControls && (
+            <div className="play-overlay" onClick={togglePlay}>
+              <Play className="overlay-play-icon" />
+            </div>
+          )}
+        </>
       )}
 
       {showControls && videoUrl && (

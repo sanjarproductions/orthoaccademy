@@ -11,7 +11,7 @@ const Dashboard = () => {
   let token = localStorage.getItem("user-token");
   let location = useParams();
 
-  const [activeVideoId, setActiveVideoId] = useState(1);
+  const [activeVideoId, setActiveVideoId] = useState(0);
   const [course, setCourse] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isVideoChanging, setIsVideoChanging] = useState(false);
