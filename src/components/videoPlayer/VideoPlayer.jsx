@@ -9,10 +9,10 @@ import {
 } from 'lucide-react';
 import "./VideoPlayer.css";
 
-let token = localStorage.getItem("user-token");
+// Use a function to get token, rather than global variable
+const getToken = () => localStorage.getItem("user-token");
 
 const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) => {
-  const [videoUrl, setVideoUrl] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
@@ -30,51 +30,21 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
   const progressRef = useRef(null);
   const controlsTimeoutRef = useRef();
 
+  // Generate the video URL
+  const videoUrl = `https://backend-ortho-site-api-66d73427bd8c.herokuapp.com/api/v1.0/vidoes/stream?token=${getToken()}&course_id=${courseId}&video_id=${videoId}`;
+
   // Reset states when video source changes
   useEffect(() => {
-    const loadVideo = async () => {
-      try {
-        setIsPlaying(false);
-        setIsLoading(true);
-        setError(null);
-        onLoadStart?.();
+    setIsPlaying(false);
+    setIsLoading(true);
+    setError(null);
+    onLoadStart?.();
+    
+    console.log('Video stream URL set:', videoUrl);
 
-        console.log('Starting video fetch...');
-        const response = await fetch(
-          `https://backend-ortho-site-api-66d73427bd8c.herokuapp.com/api/v1.0/vidoes/stream?token=${token}&course_id=${courseId}&video_id=${videoId}`,
-          {
-            headers: { Range: "bytes=0-" },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`Error loading video: ${response.status}`);
-        }
-
-        console.log('Response received, starting blob conversion...');
-        const blob = await response.blob();
-        console.log('Blob created, creating object URL...');
-        const url = URL.createObjectURL(blob);
-        setVideoUrl(url);
-        console.log('Video URL set:', url);
-
-      } catch (error) {
-        console.error("Error fetching the video:", error);
-        setError('Error loading video');
-        setIsLoading(false);
-        onError?.();
-      }
-    };
-
-    loadVideo();
-
-    // Cleanup function
-    return () => {
-      if (videoUrl) {
-        URL.revokeObjectURL(videoUrl);
-      }
-    };
-  }, [courseId, videoId]);
+    // Return cleanup function (no need to revoke anything)
+    return () => {};
+  }, [courseId, videoId, videoUrl]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -90,44 +60,22 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
       onLoadedData?.();
     };
 
-    const handleWaiting = () => {
-      setIsBuffering(true);
-    };
-
-    const handlePlaying = () => {
-      setIsBuffering(false);
-      setIsLoading(false);
-    };
-
     const handleTimeUpdate = () => {
       if (!isDragging) {
         setCurrentTime(video.currentTime);
       }
     };
 
-    const handleError = (e) => {
-      console.error('Video error:', e, video.error);
-      setError('Error loading video');
-      setIsLoading(false);
-      onError?.();
-    };
-
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
     video.addEventListener('loadeddata', handleLoadedData);
-    video.addEventListener('waiting', handleWaiting);
-    video.addEventListener('playing', handlePlaying);
     video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('error', handleError);
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       video.removeEventListener('loadeddata', handleLoadedData);
-      video.removeEventListener('waiting', handleWaiting);
-      video.removeEventListener('playing', handlePlaying);
       video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('error', handleError);
     };
-  }, [isDragging, onLoadedData, onError]);
+  }, [isDragging, onLoadedData]);
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -309,7 +257,20 @@ const VideoPlayer = ({courseId, videoId, onLoadStart, onLoadedData, onError}) =>
             className="video-player"
             onClick={togglePlay}
             playsInline
-            preload="auto"
+            preload="metadata"
+            crossOrigin="anonymous"
+            controlsList="nodownload"
+            onError={(e) => {
+              console.error('Video error:', e, videoRef.current?.error);
+              setError('Error loading video');
+              setIsLoading(false);
+              onError?.();
+            }}
+            onWaiting={() => setIsBuffering(true)}
+            onPlaying={() => {
+              setIsBuffering(false);
+              setIsLoading(false);
+            }}
           />
           {isBuffering && isPlaying && (
             <div className="buffering-indicator">
